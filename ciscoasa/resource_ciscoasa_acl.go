@@ -224,7 +224,7 @@ func resourceCiscoASAACLUpdate(d *schema.ResourceData, meta interface{}) error {
 		}
 
 		// Then loop through all the old rules and remove them
-		if nrs.Len() > 0 {
+		if ors.Len() > 0 {
 			err := deleteCiscoASAACLRules(meta, d.Id(), rules, ors)
 
 			// We need to update this first to preserve the correct state
