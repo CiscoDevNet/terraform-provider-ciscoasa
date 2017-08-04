@@ -1,6 +1,10 @@
 package ciscoasa
 
 import (
+	"strings"
+
+	"net"
+
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -57,4 +61,60 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	}
 
 	return config.NewClient()
+}
+
+// cidrToAddress handles reserved cidr notations which within
+// acl's are not allowed and need to be provided as reserved key words
+func cidrToAddress(s string) string {
+	switch strings.ToLower(s) {
+	case "0.0.0.0/0":
+		return "any4"
+	case "::/0":
+		return "any6"
+	}
+
+	return trimNetworkPrefix(s)
+}
+
+func addressToCIDR(s string) string {
+	switch strings.ToLower(s) {
+	case "any":
+		return "0.0.0.0/0"
+	case "any4":
+		return "0.0.0.0/0"
+	case "any6":
+		return "::/0"
+	}
+
+	return addNetworkPrefix(s)
+}
+
+func trimNetworkPrefix(s string) string {
+	addr, _, err := net.ParseCIDR(s)
+	if err == nil {
+		if addr.To4() != nil {
+			return strings.TrimSuffix(s, "/32")
+		}
+		if addr.To16() != nil {
+			return strings.TrimSuffix(s, "/128")
+		}
+	}
+
+	return s
+}
+
+func addNetworkPrefix(s string) string {
+	if !strings.Contains(s, "/") {
+		addr, _, err := net.ParseCIDR(s + "/32")
+		if err == nil {
+			if addr.To4() != nil {
+				return s + "/32"
+			}
+			if addr.To16() != nil {
+				return s + "/128"
+			}
+		}
+	}
+
+	return s
 }

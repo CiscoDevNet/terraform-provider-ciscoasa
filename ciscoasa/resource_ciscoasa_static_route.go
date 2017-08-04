@@ -58,7 +58,7 @@ func resourceCiscoASAStaticRouteCreate(d *schema.ResourceData, meta interface{})
 
 	routeID, err := ca.Routing.CreateStaticRoute(
 		d.Get("interface").(string),
-		d.Get("network").(string),
+		cidrToAddress(d.Get("network").(string)),
 		d.Get("gateway").(string),
 		d.Get("metric").(int),
 		d.Get("tracked").(bool),
@@ -91,7 +91,7 @@ func resourceCiscoASAStaticRouteRead(d *schema.ResourceData, meta interface{}) e
 	}
 
 	d.Set("interface", r.Interface.Name)
-	d.Set("network", r.Network.String())
+	d.Set("network", addressToCIDR(r.Network.String()))
 	d.Set("gateway", r.Gateway.String())
 	d.Set("metric", r.DistanceMetric)
 	d.Set("tunneled", r.Tunneled)
@@ -106,7 +106,7 @@ func resourceCiscoASAStaticRouteUpdate(d *schema.ResourceData, meta interface{})
 	routeID, err := ca.Routing.UpdateStaticRoute(
 		d.Id(),
 		d.Get("interface").(string),
-		d.Get("network").(string),
+		cidrToAddress(d.Get("network").(string)),
 		d.Get("gateway").(string),
 		d.Get("metric").(int),
 		d.Get("tracked").(bool),

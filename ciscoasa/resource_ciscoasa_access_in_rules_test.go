@@ -32,27 +32,27 @@ func TestAccCiscoASAAccessInRules_basic(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_access_in_rules.foo", "rule.1891598391.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.source", "192.168.10.5"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.source", "192.168.10.5/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.destination", "192.168.15.0/25"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.destination", "192.168.15.0/25"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.destination_service", "tcp/443"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.destination_service", "tcp/443"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.active", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.permit", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.source", "192.168.10.0/24"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.source", "192.168.10.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.source_service", "udp"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.source_service", "udp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.destination", "192.168.15.6"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.destination", "192.168.15.6/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.destination_service", "udp/53"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.destination_service", "udp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.active", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.permit", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.permit", "true"),
 				),
 			},
 		},
@@ -82,30 +82,29 @@ func TestAccCiscoASAAccessInRules_update(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_access_in_rules.foo", "rule.1891598391.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.source", "192.168.10.5"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.source", "192.168.10.5/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.destination", "192.168.15.0/25"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.destination", "192.168.15.0/25"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.destination_service", "tcp/443"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.destination_service", "tcp/443"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.active", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.1860076939.permit", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.2430287332.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.source", "192.168.10.0/24"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.source", "192.168.10.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.source_service", "udp"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.source_service", "udp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.destination", "192.168.15.6"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.destination", "192.168.15.6/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.destination_service", "udp/53"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.destination_service", "udp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.active", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3786451327.permit", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1264227362.permit", "true"),
 				),
 			},
-
 			resource.TestStep{
 				Config: testAccCiscoASAAccessInRules_update,
 				Check: resource.ComposeTestCheckFunc(
@@ -121,17 +120,17 @@ func TestAccCiscoASAAccessInRules_update(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_access_in_rules.foo", "rule.2718879164.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.source", "192.168.12.0/24"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.source", "192.168.12.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.source_service", "tcp"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.source_service", "tcp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.destination", "192.168.15.16"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.destination", "192.168.15.16/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.destination_service", "tcp/53"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.destination_service", "tcp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.active", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_access_in_rules.foo", "rule.3651644684.permit", "true"),
+						"ciscoasa_access_in_rules.foo", "rule.1247899621.permit", "true"),
 					resource.TestCheckResourceAttr(
 						"ciscoasa_access_in_rules.foo", "rule.3295053340.source", "192.168.10.0/24"),
 					resource.TestCheckResourceAttr(
@@ -200,14 +199,14 @@ var testAccCiscoASAAccessInRules_basic = fmt.Sprintf(`
 resource "ciscoasa_access_in_rules" "foo" {
   interface = "%s"
   rule {
-    "source" = "192.168.10.5"
+    "source" = "192.168.10.5/32"
     "destination" = "192.168.15.0/25"
     "destination_service" = "tcp/443"
   }
   rule {
     "source" = "192.168.10.0/24"
 		"source_service" = "udp"
-    "destination" = "192.168.15.6"
+    "destination" = "192.168.15.6/32"
     "destination_service" = "udp/53"
   }
   rule {
@@ -229,7 +228,7 @@ resource "ciscoasa_access_in_rules" "foo" {
   rule {
     "source" = "192.168.12.0/24"
 		"source_service" = "tcp"
-    "destination" = "192.168.15.16"
+    "destination" = "192.168.15.16/32"
     "destination_service" = "tcp/53"
   }
   rule {

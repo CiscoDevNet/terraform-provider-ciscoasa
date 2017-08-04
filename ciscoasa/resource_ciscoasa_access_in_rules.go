@@ -107,9 +107,9 @@ func createCiscoASAAccessInRulesRules(meta interface{}, iface string, rules *sch
 
 		id, err := ca.Access.CreateAccessInRule(
 			iface,
-			rule["source"].(string),
+			cidrToAddress(rule["source"].(string)),
 			rule["source_service"].(string),
-			rule["destination"].(string),
+			cidrToAddress(rule["destination"].(string)),
 			rule["destination_service"].(string),
 			rule["active"].(bool),
 			rule["permit"].(bool),
@@ -164,8 +164,8 @@ func resourceCiscoASAAccessInRulesRead(d *schema.ResourceData, meta interface{})
 			// Delete the known rule so only unknown rules remain in the ruleMap
 			delete(ruleMap, id)
 
-			rule["source"] = r.SrcAddress.String()
-			rule["destination"] = r.DstAddress.String()
+			rule["source"] = addressToCIDR(r.SrcAddress.String())
+			rule["destination"] = addressToCIDR(r.DstAddress.String())
 			rule["destination_service"] = r.DstService.String()
 			rule["active"] = r.Active
 			rule["permit"] = r.Permit
@@ -179,8 +179,8 @@ func resourceCiscoASAAccessInRulesRead(d *schema.ResourceData, meta interface{})
 		for _, r := range ruleMap {
 			rule := make(map[string]interface{})
 
-			rule["source"] = r.SrcAddress.String()
-			rule["destination"] = r.DstAddress.String()
+			rule["source"] = addressToCIDR(r.SrcAddress.String())
+			rule["destination"] = addressToCIDR(r.DstAddress.String())
 			rule["destination_service"] = r.DstService.String()
 			rule["active"] = r.Active
 			rule["permit"] = r.Permit
