@@ -20,10 +20,13 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
+[prune]
+  go-tests = true
+  unused-packages = true
 
 [[constraint]]
   name = "github.com/hashicorp/terraform"
-  version = "=0.10.6"
+  version = "=0.11.3"
 
 [[constraint]]
   branch = "master"
