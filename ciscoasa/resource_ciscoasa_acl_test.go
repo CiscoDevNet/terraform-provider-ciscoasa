@@ -22,37 +22,37 @@ func TestAccCiscoASAACL_basic(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_acl.foo", "rule.#", "3"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.source", "192.168.10.0/23"),
+						"ciscoasa_acl.foo", "rule.0.source", "192.168.10.5/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.destination", "192.168.12.0/23"),
+						"ciscoasa_acl.foo", "rule.0.destination", "192.168.15.0/25"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.destination_service", "icmp/0"),
+						"ciscoasa_acl.foo", "rule.0.destination_service", "tcp/443"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.active", "true"),
+						"ciscoasa_acl.foo", "rule.0.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.permit", "true"),
+						"ciscoasa_acl.foo", "rule.0.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.source", "192.168.10.5/32"),
+						"ciscoasa_acl.foo", "rule.1.source", "192.168.10.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.destination", "192.168.15.0/25"),
+						"ciscoasa_acl.foo", "rule.1.source_service", "udp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.destination_service", "tcp/443"),
+						"ciscoasa_acl.foo", "rule.1.destination", "192.168.15.6/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.active", "true"),
+						"ciscoasa_acl.foo", "rule.1.destination_service", "udp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.permit", "true"),
+						"ciscoasa_acl.foo", "rule.1.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.source", "192.168.10.0/24"),
+						"ciscoasa_acl.foo", "rule.1.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.source_service", "udp"),
+						"ciscoasa_acl.foo", "rule.2.source", "192.168.10.0/23"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.destination", "192.168.15.6/32"),
+						"ciscoasa_acl.foo", "rule.2.destination", "192.168.12.0/23"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.destination_service", "udp/53"),
+						"ciscoasa_acl.foo", "rule.2.destination_service", "icmp/0"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.active", "true"),
+						"ciscoasa_acl.foo", "rule.2.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.permit", "true"),
+						"ciscoasa_acl.foo", "rule.2.permit", "true"),
 				),
 			},
 		},
@@ -72,37 +72,37 @@ func TestAccCiscoASAACL_update(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_acl.foo", "rule.#", "3"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.source", "192.168.10.0/23"),
+						"ciscoasa_acl.foo", "rule.0.source", "192.168.10.5/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.destination", "192.168.12.0/23"),
+						"ciscoasa_acl.foo", "rule.0.destination", "192.168.15.0/25"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.destination_service", "icmp/0"),
+						"ciscoasa_acl.foo", "rule.0.destination_service", "tcp/443"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.active", "true"),
+						"ciscoasa_acl.foo", "rule.0.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1891598391.permit", "true"),
+						"ciscoasa_acl.foo", "rule.0.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.source", "192.168.10.5/32"),
+						"ciscoasa_acl.foo", "rule.1.source", "192.168.10.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.destination", "192.168.15.0/25"),
+						"ciscoasa_acl.foo", "rule.1.source_service", "udp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.destination_service", "tcp/443"),
+						"ciscoasa_acl.foo", "rule.1.destination", "192.168.15.6/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.active", "true"),
+						"ciscoasa_acl.foo", "rule.1.destination_service", "udp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.2430287332.permit", "true"),
+						"ciscoasa_acl.foo", "rule.1.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.source", "192.168.10.0/24"),
+						"ciscoasa_acl.foo", "rule.1.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.source_service", "udp"),
+						"ciscoasa_acl.foo", "rule.2.source", "192.168.10.0/23"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.destination", "192.168.15.6/32"),
+						"ciscoasa_acl.foo", "rule.2.destination", "192.168.12.0/23"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.destination_service", "udp/53"),
+						"ciscoasa_acl.foo", "rule.2.destination_service", "icmp/0"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.active", "true"),
+						"ciscoasa_acl.foo", "rule.2.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1264227362.permit", "true"),
+						"ciscoasa_acl.foo", "rule.2.permit", "true"),
 				),
 			},
 
@@ -111,37 +111,61 @@ func TestAccCiscoASAACL_update(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoASAACLExists("ciscoasa_acl.foo"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3981544264.source", "0.0.0.0/0"),
+						"ciscoasa_acl.foo", "rule.#", "5"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3981544264.destination", "192.168.12.0/24"),
+						"ciscoasa_acl.foo", "rule.0.source", "192.168.10.5/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3981544264.destination_service", "icmp/8"),
+						"ciscoasa_acl.foo", "rule.0.destination", "192.168.15.0/25"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3981544264.active", "true"),
+						"ciscoasa_acl.foo", "rule.0.destination_service", "tcp/443"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3981544264.permit", "true"),
+						"ciscoasa_acl.foo", "rule.0.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.source", "192.168.12.0/24"),
+						"ciscoasa_acl.foo", "rule.0.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.source_service", "tcp"),
+						"ciscoasa_acl.foo", "rule.1.source", "192.168.12.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.destination", "192.168.15.16/32"),
+						"ciscoasa_acl.foo", "rule.1.source_service", "tcp"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.destination_service", "tcp/53"),
+						"ciscoasa_acl.foo", "rule.1.destination", "192.168.15.16/32"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.active", "true"),
+						"ciscoasa_acl.foo", "rule.1.destination_service", "tcp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.1247899621.permit", "true"),
+						"ciscoasa_acl.foo", "rule.1.active", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3295053340.source", "192.168.10.0/24"),
+						"ciscoasa_acl.foo", "rule.1.permit", "true"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3295053340.destination", "192.168.15.0/25"),
+						"ciscoasa_acl.foo", "rule.2.source", "0.0.0.0/0"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3295053340.destination_service", "tcp/443"),
+						"ciscoasa_acl.foo", "rule.2.destination", "192.168.12.0/24"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3295053340.active", "true"),
+						"ciscoasa_acl.foo", "rule.2.destination_service", "icmp/8"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_acl.foo", "rule.3295053340.permit", "true"),
+						"ciscoasa_acl.foo", "rule.2.active", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.2.permit", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.source", "192.168.10.0/24"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.source_service", "udp"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.destination", "192.168.15.6/32"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.destination_service", "udp/53"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.active", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.3.permit", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.4.source", "192.168.10.0/23"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.4.destination", "192.168.12.0/23"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.4.destination_service", "icmp/0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.4.active", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_acl.foo", "rule.4.permit", "true"),
 				),
 			},
 		},
@@ -200,20 +224,20 @@ var testAccCiscoASAACL_basic = fmt.Sprintf(`
 resource "ciscoasa_acl" "foo" {
   name = "%s"
   rule {
-    "source" = "192.168.10.5/32"
-    "destination" = "192.168.15.0/25"
-    "destination_service" = "tcp/443"
+    source = "192.168.10.5/32"
+    destination = "192.168.15.0/25"
+    destination_service = "tcp/443"
   }
   rule {
-    "source" = "192.168.10.0/24"
-    "source_service" = "udp"
-    "destination" = "192.168.15.6/32"
-    "destination_service" = "udp/53"
+    source = "192.168.10.0/24"
+    source_service = "udp"
+    destination = "192.168.15.6/32"
+    destination_service = "udp/53"
   }
   rule {
-    "source" = "192.168.10.0/23"
-    "destination" = "192.168.12.0/23"
-    "destination_service" = "icmp/0"
+    source = "192.168.10.0/23"
+    destination = "192.168.12.0/23"
+    destination_service = "icmp/0"
   }
 }`,
 	CISCOASA_OBJECT_PREFIX)
@@ -222,20 +246,36 @@ var testAccCiscoASAACL_update = fmt.Sprintf(`
 resource "ciscoasa_acl" "foo" {
   name = "%s"
   rule {
-    "source" = "192.168.10.0/24"
-    "destination" = "192.168.15.0/25"
-    "destination_service" = "tcp/443"
+    source = "192.168.10.5/32"
+    destination = "192.168.15.0/25"
+    destination_service = "tcp/443"
   }
   rule {
-    "source" = "192.168.12.0/24"
-    "source_service" = "tcp"
-    "destination" = "192.168.15.16/32"
-    "destination_service" = "tcp/53"
+    source = "192.168.12.0/24"
+    source_service = "tcp"
+    destination = "192.168.15.16/32"
+    destination_service = "tcp/53"
+    remarks = [
+      "terraform-test"
+    ]
   }
   rule {
-    "source" = "0.0.0.0/0"
-    "destination" = "192.168.12.0/24"
-    "destination_service" = "icmp/8"
+    source = "0.0.0.0/0"
+    destination = "192.168.12.0/24"
+    destination_service = "icmp/8"
+		log_interval = 10
+		log_status = "Errors"
   }
+  rule {
+    source = "192.168.10.0/24"
+    source_service = "udp"
+    destination = "192.168.15.6/32"
+    destination_service = "udp/53"
+  }
+  rule {
+    source = "192.168.10.0/23"
+    destination = "192.168.12.0/23"
+    destination_service = "icmp/0"
+	}
 }`,
 	CISCOASA_OBJECT_PREFIX)

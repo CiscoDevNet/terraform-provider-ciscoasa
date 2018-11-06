@@ -134,27 +134,42 @@ func (s *objectsService) ListExtendedACLACEs(aclName string) (*ExtendedACEObject
 	return result, nil
 }
 
+type CreateExtendedACLACEOptions struct {
+	Active      bool
+	Dst         string
+	DstService  string
+	Permit      bool
+	Remarks     []string
+	Position    int
+	RuleLogging *RuleLogging
+	Src         string
+	SrcService  string
+}
+
 // CreateExtendedACLACE creates an access control element.
-func (s *objectsService) CreateExtendedACLACE(aclName, src, srcService, dst, dstService string, active, permit bool) (string, error) {
+func (s *objectsService) CreateExtendedACLACE(aclName string, options CreateExtendedACLACEOptions) (string, error) {
 	u := fmt.Sprintf("/api/objects/extendedacls/%s/aces", aclName)
 
 	e := &ExtendedACEObject{
-		Active: active,
-		Permit: permit,
-		Kind:   "object#ExtendedACE",
+		Active:      options.Active,
+		Permit:      options.Permit,
+		Remarks:     options.Remarks,
+		Position:    options.Position,
+		RuleLogging: options.RuleLogging,
+		Kind:        "object#ExtendedACE",
 	}
 
 	var err error
-	if e.SrcAddress, err = s.Objects.objectFromAddress(src); err != nil {
+	if e.DstAddress, err = s.Objects.objectFromAddress(options.Dst); err != nil {
 		return "", err
 	}
-	if e.SrcService, err = s.Objects.objectFromService(srcService); err != nil {
+	if e.DstService, err = s.Objects.objectFromService(options.DstService); err != nil {
 		return "", err
 	}
-	if e.DstAddress, err = s.Objects.objectFromAddress(dst); err != nil {
+	if e.SrcAddress, err = s.Objects.objectFromAddress(options.Src); err != nil {
 		return "", err
 	}
-	if e.DstService, err = s.Objects.objectFromService(dstService); err != nil {
+	if e.SrcService, err = s.Objects.objectFromService(options.SrcService); err != nil {
 		return "", err
 	}
 
@@ -186,27 +201,42 @@ func (s *objectsService) GetExtendedACLACE(aclName string, aceID string) (*Exten
 	return e, err
 }
 
+type UpdateExtendedACLACEOptions struct {
+	Active      bool
+	Dst         string
+	DstService  string
+	Permit      bool
+	Remarks     []string
+	Position    int
+	RuleLogging *RuleLogging
+	Src         string
+	SrcService  string
+}
+
 // UpdateExtendedACLACE updates an access control element.
-func (s *objectsService) UpdateExtendedACLACE(aclName, aceID, src, srcService, dst, dstService string, active, permit bool) (string, error) {
+func (s *objectsService) UpdateExtendedACLACE(aclName, aceID string, options UpdateExtendedACLACEOptions) (string, error) {
 	u := fmt.Sprintf("/api/objects/extendedacls/%s/aces/%s", aclName, aceID)
 
 	e := &ExtendedACEObject{
-		Active: active,
-		Permit: permit,
-		Kind:   "object#ExtendedACE",
+		Active:      options.Active,
+		Permit:      options.Permit,
+		Remarks:     options.Remarks,
+		Position:    options.Position,
+		RuleLogging: options.RuleLogging,
+		Kind:        "object#ExtendedACE",
 	}
 
 	var err error
-	if e.SrcAddress, err = s.Objects.objectFromAddress(src); err != nil {
+	if e.DstAddress, err = s.Objects.objectFromAddress(options.Dst); err != nil {
 		return "", err
 	}
-	if e.SrcService, err = s.Objects.objectFromService(src); err != nil {
+	if e.DstService, err = s.Objects.objectFromService(options.DstService); err != nil {
 		return "", err
 	}
-	if e.DstAddress, err = s.Objects.objectFromAddress(dst); err != nil {
+	if e.SrcAddress, err = s.Objects.objectFromAddress(options.Src); err != nil {
 		return "", err
 	}
-	if e.DstService, err = s.Objects.objectFromService(dstService); err != nil {
+	if e.SrcService, err = s.Objects.objectFromService(options.SrcService); err != nil {
 		return "", err
 	}
 
