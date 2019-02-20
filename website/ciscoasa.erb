@@ -1,0 +1,44 @@
+<% wrap_layout :inner do %>
+    <% content_for :sidebar do %>
+      <div class="docs-sidebar hidden-print affix-top" role="complementary">
+        <ul class="nav docs-sidenav">
+          <li<%= sidebar_current("docs-home") %>>
+            <a href="/docs/providers/index.html">All Providers</a>
+          </li>
+  
+          <li<%= sidebar_current("docs-ciscoasa-index") %>>
+            <a href="/docs/providers/ciscoasa/index.html">Cisco ASA Provider</a>
+          </li>
+  
+          <li<%= sidebar_current("docs-ciscoasa-resource") %>>
+            <a href="#">Resources</a>
+            <ul class="nav nav-visible">
+              <li<%= sidebar_current("docs-ciscoasa-resource-access-in-rules") %>>
+                <a href="/docs/providers/ciscoasa/r/access_in_rules.html">ciscoasa_access_in_rules</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-access-out-rules") %>>
+                <a href="/docs/providers/ciscoasa/r/access_out_rules.html">ciscoasa_access_out_rules</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-acl") %>>
+                <a href="/docs/providers/ciscoasa/r/acl.html">ciscoasa_acl</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-network-object-group") %>>
+                <a href="/docs/providers/ciscoasa/r/network_object_group.html">ciscoasa_network_object_group</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-network-object") %>>
+                <a href="/docs/providers/ciscoasa/r/network_object.html">ciscoasa_network_object</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-network-service-group") %>>
+                <a href="/docs/providers/ciscoasa/r/network_service_group.html">ciscoasa_network_service_group</a>
+              </li>
+              <li<%= sidebar_current("docs-ciscoasa-resource-static-route") %>>
+                <a href="/docs/providers/ciscoasa/r/static_route.html">ciscoasa_static_route</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  
+    <%= yield %>
+    <% end %>
