@@ -127,6 +127,9 @@ type Logger interface {
 
 	// Return a value that conforms to the stdlib log.Logger interface
 	StandardLogger(opts *StandardLoggerOptions) *log.Logger
+
+	// Return a value that conforms to io.Writer, which can be passed into log.SetOutput()
+	StandardWriter(opts *StandardLoggerOptions) io.Writer
 }
 
 type StandardLoggerOptions struct {
@@ -144,7 +147,7 @@ type LoggerOptions struct {
 	// The threshold for the logger. Anything less severe is supressed
 	Level Level
 
-	// Where to write the logs to. Defaults to os.Stdout if nil
+	// Where to write the logs to. Defaults to os.Stderr if nil
 	Output io.Writer
 
 	// An optional mutex pointer in case Output is shared
