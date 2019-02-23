@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hashicorp/terraform/plugin"
-	"github.com/xanzy/terraform-provider-ciscoasa/ciscoasa"
+	"github.com/terraform-providers/terraform-provider-ciscoasa/ciscoasa"
 )
 
 func main() {

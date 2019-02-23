@@ -1,4 +1,4 @@
-module github.com/xanzy/terraform-provider-ciscoasa
+module github.com/terraform-providers/terraform-provider-ciscoasa
 
 require (
 	github.com/agext/levenshtein v1.2.2 // indirect
