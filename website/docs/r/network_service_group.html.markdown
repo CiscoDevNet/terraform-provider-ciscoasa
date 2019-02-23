@@ -15,6 +15,7 @@ Provides a Cisco ASA Network Service Group.
 ```hcl
 resource "ciscoasa_network_service_group" "service_group" {
   name = "service_group"
+  
   members = [
     "tcp/80",
     "udp/53",

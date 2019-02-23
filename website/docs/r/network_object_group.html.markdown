@@ -14,12 +14,13 @@ Provides a Cisco ASA Network Object Group.
 
 ```hcl
 resource "ciscoasa_network_object" "ipv4host" {
-  name = "my_object"
+  name  = "my_object"
   value = "192.168.10.5"
 }
 
 resource "ciscoasa_network_object_group" "objgrp_mixed" {
   name = "my_group"
+
   members = [
     "${ciscoasa_network_object.obj_ipv4host.name}",
     "192.168.10.15",
