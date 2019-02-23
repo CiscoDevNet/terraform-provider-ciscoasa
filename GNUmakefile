@@ -22,4 +22,4 @@ testinfra-testacc:
 	TF_SCHEMA_PANIC_ON_ERROR=1 \
 	TF_ACC=1 go test ./... -count 1 -v -cover $(TESTARGS) -timeout 10m
 
-.PHONY: build fmtcheck testacc testinfra-testacc
+.PHONY: build fmtcheck test testacc testinfra-testacc
