@@ -8,7 +8,7 @@ fmtcheck:
 test:
 	go test ./...
 
-testacc: fmtcheck
+testacc:
 	TF_SCHEMA_PANIC_ON_ERROR=1 \
 	TF_ACC=1 go test ./... -v $(TESTARGS) -timeout 10m
 
