@@ -14,15 +14,15 @@ Provides a Cisco ASA static route resource.
 
 ```hcl
 resource "ciscoasa_static_route" "ipv4_static_route" {
-  "interface" = "inside"
-  "network" = "10.254.0.0/16"
-  "gateway" = "192.168.10.20"
+  interface = "inside"
+  network   = "10.254.0.0/16"
+  gateway   = "192.168.10.20"
 }
 
 resource "ciscoasa_static_route" "ipv6_static_route" {
-  "interface" = "inside"
-  "network" = "fd01:1337::/64"
-  "gateway" = "fd01:1338::1"
+  interface = "inside"
+  network   = "fd01:1337::/64"
+  gateway   = "fd01:1338::1"
 }
 ```
 

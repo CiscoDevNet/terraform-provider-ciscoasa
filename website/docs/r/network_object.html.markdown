@@ -14,15 +14,15 @@ Provides a Cisco ASA Network Object resource.
 
 ```hcl
 resource "ciscoasa_network_object" "ipv4host" {
-  name = "ipv4_host"
+  name  = "ipv4_host"
   value = "192.168.10.5"
 }
 resource "ciscoasa_network_object" "ipv4range" {
-  name = "ipv4_range"
+  name  = "ipv4_range"
   value = "192.168.10.5-192.168.10.15"
 }
 resource "ciscoasa_network_object" "ipv4_subnet" {
-  name = "ipv4_subnet"
+  name  = "ipv4_subnet"
   value = "192.168.10.128/25"
 }
 ```

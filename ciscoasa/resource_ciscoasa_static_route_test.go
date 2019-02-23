@@ -95,15 +95,15 @@ func testAccCheckCiscsoASAStaticRouteDestroy(s *terraform.State) error {
 
 var testAccCiscoStaticRoutes = fmt.Sprintf(`
 resource "ciscoasa_static_route" "ipv4_static_route" {
-  "interface" = "%s"
-  "network" = "10.254.0.0/16"
-  "gateway" = "192.168.10.20"
+  interface = "%s"
+  network = "10.254.0.0/16"
+  gateway = "192.168.10.20"
 }
 
 resource "ciscoasa_static_route" "ipv6_static_route" {
-  "interface" = "%s"
-  "network" = "fd01:1337::/64"
-  "gateway" = "fd01:1338::1"
+  interface = "%s"
+  network = "fd01:1337::/64"
+  gateway = "fd01:1338::1"
 }`,
 	CISCOASA_INTERFACE_NAME,
 	CISCOASA_INTERFACE_NAME)
