@@ -23,7 +23,7 @@ require (
 	github.com/vmihailenco/msgpack v4.0.2+incompatible // indirect
 	github.com/xanzy/go-ciscoasa v0.2.0
 	github.com/zclconf/go-cty v0.0.0-20190212192503-19dda139b164 // indirect
-	golang.org/x/crypto v0.0.0-20190222232534-a57398324d7b // indirect
+	golang.org/x/crypto v0.0.0-20190225125759-7f87c0fbb88b // indirect
 	golang.org/x/net v0.0.0-20190213061140-3a22650c66bd // indirect
 	golang.org/x/sys v0.0.0-20190222171317-cd391775e71e // indirect
 	golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2 // indirect
