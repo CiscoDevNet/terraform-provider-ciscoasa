@@ -6,7 +6,7 @@ github.com/apparentlymart/go-cidr/cidr
 github.com/apparentlymart/go-textseg/textseg
 # github.com/armon/go-radix v1.0.0
 github.com/armon/go-radix
-# github.com/aws/aws-sdk-go v1.17.4
+# github.com/aws/aws-sdk-go v1.17.6
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/credentials
 github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds
@@ -165,7 +165,7 @@ github.com/hashicorp/yamux
 github.com/jmespath/go-jmespath
 # github.com/mattn/go-colorable v0.1.1
 github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.5
+# github.com/mattn/go-isatty v0.0.6
 github.com/mattn/go-isatty
 # github.com/mitchellh/cli v1.0.0
 github.com/mitchellh/cli
@@ -203,7 +203,7 @@ github.com/ulikunitz/xz/internal/hash
 # github.com/vmihailenco/msgpack v4.0.2+incompatible
 github.com/vmihailenco/msgpack
 github.com/vmihailenco/msgpack/codes
-# github.com/xanzy/go-ciscoasa v0.2.0
+# github.com/xanzy/go-ciscoasa v0.2.1
 github.com/xanzy/go-ciscoasa/ciscoasa
 # github.com/zclconf/go-cty v0.0.0-20190212192503-19dda139b164
 github.com/zclconf/go-cty/cty
@@ -214,7 +214,7 @@ github.com/zclconf/go-cty/cty/gocty
 github.com/zclconf/go-cty/cty/set
 github.com/zclconf/go-cty/cty/function
 github.com/zclconf/go-cty/cty/function/stdlib
-# golang.org/x/crypto v0.0.0-20190222232534-a57398324d7b
+# golang.org/x/crypto v0.0.0-20190225124518-7f87c0fbb88b
 golang.org/x/crypto/openpgp
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/openpgp/armor
@@ -224,7 +224,7 @@ golang.org/x/crypto/openpgp/s2k
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
 golang.org/x/crypto/openpgp/elgamal
-# golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
+# golang.org/x/net v0.0.0-20190226193003-66a96c8a540e
 golang.org/x/net/context
 golang.org/x/net/trace
 golang.org/x/net/internal/timeseries
@@ -232,7 +232,7 @@ golang.org/x/net/http2
 golang.org/x/net/http2/hpack
 golang.org/x/net/idna
 golang.org/x/net/http/httpguts
-# golang.org/x/sys v0.0.0-20190222171317-cd391775e71e
+# golang.org/x/sys v0.0.0-20190225065934-cc5685c2db12
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2
 golang.org/x/text/unicode/norm
@@ -249,9 +249,9 @@ google.golang.org/appengine/internal/modules
 google.golang.org/appengine/internal/base
 google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/remote_api
-# google.golang.org/genproto v0.0.0-20190219182410-082222b4a5c5
+# google.golang.org/genproto v0.0.0-20190226184841-fc2db5cae922
 google.golang.org/genproto/googleapis/rpc/status
-# google.golang.org/grpc v1.18.0
+# google.golang.org/grpc v1.19.0
 google.golang.org/grpc
 google.golang.org/grpc/credentials
 google.golang.org/grpc/health
