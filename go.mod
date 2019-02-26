@@ -3,7 +3,7 @@ module github.com/terraform-providers/terraform-provider-ciscoasa
 require (
 	github.com/agext/levenshtein v1.2.2 // indirect
 	github.com/apparentlymart/go-dump v0.0.0-20190214190832-042adf3cf4a0 // indirect
-	github.com/aws/aws-sdk-go v1.17.4 // indirect
+	github.com/aws/aws-sdk-go v1.17.6 // indirect
 	github.com/hashicorp/go-getter v1.1.0 // indirect
 	github.com/hashicorp/go-hclog v0.7.0 // indirect
 	github.com/hashicorp/go-plugin v0.0.0-20190220160451-3f118e8ee104 // indirect
