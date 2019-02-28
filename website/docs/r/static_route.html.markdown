@@ -6,7 +6,7 @@ description: |-
   Provides a Cisco ASA Static Route resource.
 ---
 
-# github_issue_label
+# ciscoasa_static_route
 
 Provides a Cisco ASA static route resource.
 

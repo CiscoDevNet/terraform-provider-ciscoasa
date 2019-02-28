@@ -6,7 +6,7 @@ description: |-
   Provides a Cisco ASA Network Service Group resource.
 ---
 
-# github_issue_label
+# ciscoasa_network_service_group
 
 Provides a Cisco ASA Network Service Group.
 

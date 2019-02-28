@@ -6,7 +6,7 @@ description: |-
   Provides a Cisco ASA Network Object Group resource.
 ---
 
-# github_issue_label
+# ciscoasa_network_object_group
 
 Provides a Cisco ASA Network Object Group.
 
