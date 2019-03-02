@@ -224,7 +224,7 @@ golang.org/x/crypto/openpgp/s2k
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
 golang.org/x/crypto/openpgp/elgamal
-# golang.org/x/net v0.0.0-20190226193003-66a96c8a540e
+# golang.org/x/net v0.0.0-20190302045135-16b79f2e4e95
 golang.org/x/net/context
 golang.org/x/net/trace
 golang.org/x/net/internal/timeseries
