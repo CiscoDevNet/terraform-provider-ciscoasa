@@ -7,5 +7,8 @@
     "golang.org/x/crypto",
     "golang.org/x/net",
     "golang.org/x/sys"
+  ],
+  "labels": [
+    "dependencies"
   ]
 }
