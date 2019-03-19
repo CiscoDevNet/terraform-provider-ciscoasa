@@ -1,7 +1,7 @@
 module github.com/terraform-providers/terraform-provider-ciscoasa
 
 require (
-	github.com/aws/aws-sdk-go v1.17.6 // indirect
+	github.com/aws/aws-sdk-go v1.18.5 // indirect
 	github.com/hashicorp/go-hclog v0.7.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
