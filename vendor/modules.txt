@@ -205,7 +205,7 @@ github.com/vmihailenco/msgpack
 github.com/vmihailenco/msgpack/codes
 # github.com/xanzy/go-ciscoasa v0.2.1
 github.com/xanzy/go-ciscoasa/ciscoasa
-# github.com/zclconf/go-cty v0.0.0-20190212192503-19dda139b164
+# github.com/zclconf/go-cty v0.0.0-20190320010518-9463876af40c
 github.com/zclconf/go-cty/cty
 github.com/zclconf/go-cty/cty/msgpack
 github.com/zclconf/go-cty/cty/convert
