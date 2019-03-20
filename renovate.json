@@ -7,7 +7,10 @@
     "golang.org/x/crypto",
     "golang.org/x/net",
     "golang.org/x/sys",
-    "google.golang.org/genproto"
+    "google.golang.org/genproto",
+    
+    "github.com/mattn/go-isatty",
+    "github.com/aws/aws-sdk-go"
   ],
   "labels": [
     "dependencies"
