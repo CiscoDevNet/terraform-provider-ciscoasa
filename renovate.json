@@ -10,7 +10,8 @@
     "google.golang.org/genproto",
     
     "github.com/mattn/go-isatty",
-    "github.com/aws/aws-sdk-go"
+    "github.com/aws/aws-sdk-go",
+    "github.com/zclconf/go-cty"
   ],
   "labels": [
     "dependencies"
