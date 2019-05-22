@@ -11,7 +11,7 @@ require (
 	github.com/mattn/go-isatty v0.0.6 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/ulikunitz/xz v0.5.6 // indirect
-	github.com/vmihailenco/msgpack v4.0.2+incompatible // indirect
+	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	github.com/xanzy/go-ciscoasa v0.2.1
 	github.com/zclconf/go-cty v0.0.0-20190212192503-19dda139b164 // indirect
 	golang.org/x/crypto v0.0.0-20190225124518-7f87c0fbb88b // indirect
