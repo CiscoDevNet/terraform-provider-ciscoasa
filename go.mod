@@ -14,9 +14,7 @@ require (
 	github.com/vmihailenco/msgpack v4.0.2+incompatible // indirect
 	github.com/xanzy/go-ciscoasa v0.2.1
 	github.com/zclconf/go-cty v0.0.0-20190212192503-19dda139b164 // indirect
-	golang.org/x/crypto v0.0.0-20190225124518-7f87c0fbb88b // indirect
-	golang.org/x/net v0.0.0-20190226193003-66a96c8a540e // indirect
 	golang.org/x/sys v0.0.0-20190225065934-cc5685c2db12 // indirect
 	google.golang.org/genproto v0.0.0-20190226184841-fc2db5cae922 // indirect
-	google.golang.org/grpc v1.19.0 // indirect
+	google.golang.org/grpc v1.20.1 // indirect
 )
