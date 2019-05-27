@@ -1,4 +1,9 @@
 ## 1.2.0 (Unreleased)
+
+FEATURES
+
+* Updated the `go-ciscoasa` client package to support newer Cisco ASA versions [GH-29]
+
 ## 1.1.0 (February 27, 2019)
 
 FEATURES
