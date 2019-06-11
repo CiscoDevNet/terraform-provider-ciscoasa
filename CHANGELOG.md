@@ -1,8 +1,8 @@
-## 1.2.0 (Unreleased)
+## 1.2.0 (June 11, 2019)
 
 FEATURES
 
-* Updated the `go-ciscoasa` client package to support newer Cisco ASA versions [GH-29]
+* Updated the `go-ciscoasa` client package to support newer Cisco ASA versions ([#29](https://github.com/terraform-providers/terraform-provider-tfe/issues/29))
 
 ## 1.1.0 (February 27, 2019)
 
