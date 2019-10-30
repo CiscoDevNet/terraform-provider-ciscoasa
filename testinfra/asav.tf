@@ -45,8 +45,34 @@ resource "aws_network_interface" "if" {
   source_dest_check = false
 }
 
+#
+# Note, you have to manually subscribe to this first in 
+# the console.
+#
+# https://aws.amazon.com/marketplace/pp/B00WH2LGM0
+#
+data "aws_ami" "asav" {
+  most_recent = true
+  owners      = ["aws-marketplace"]
+
+  filter {
+    name   = "name"
+    values = ["asav*"]
+  }
+
+  filter {
+    name   = "product-code"
+    values = ["80uds1joqwlz35hw1lx5h1bcc"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "asav" {
-  ami           = "${var.asav_ami_id}"
+  ami           = "${data.aws_ami.asav.id}"
   instance_type = "c4.large"
   key_name      = "${aws_key_pair.ssh.key_name}"
 
