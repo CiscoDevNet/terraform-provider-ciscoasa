@@ -11,8 +11,9 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_subnet" "main" {
-  vpc_id     = "${aws_vpc.main.id}"
-  cidr_block = "10.0.0.0/24"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+  cidr_block        = "10.0.0.0/24"
+  vpc_id            = "${aws_vpc.main.id}"
 
   tags = {
     Name = "terraform-provider-ciscoasa acc test"
