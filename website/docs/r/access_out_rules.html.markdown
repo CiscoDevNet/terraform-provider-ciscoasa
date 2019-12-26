@@ -22,7 +22,7 @@ resource "ciscoasa_access_out_rules" "foo" {
   }
   rule {
     source              = "192.168.10.0/24"
-		source_service      = "udp"
+    source_service      = "udp"
     destination         = "192.168.15.6/32"
     destination_service = "udp/53"
   }
