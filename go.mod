@@ -1,5 +1,7 @@
 module github.com/terraform-providers/terraform-provider-ciscoasa
 
+go 1.16
+
 require (
 	github.com/hashicorp/go-hclog v0.8.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
