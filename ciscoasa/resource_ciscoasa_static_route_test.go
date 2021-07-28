@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -15,7 +15,7 @@ func TestAccCiscoASAStaticRoute(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckCiscsoASAStaticRouteDestroy,
 		Steps: []resource.TestStep{
-			resource.TestStep{
+			{
 				Config: testAccCiscoStaticRoutes,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoASAStaticRouteExists([]string{"ciscoasa_static_route.ipv4_static_route",

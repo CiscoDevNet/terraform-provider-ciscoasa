@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -15,7 +15,7 @@ func TestAccCiscoASANetworkServiceGroup(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckCiscsoAsaNetworkServiceGroupDestroy,
 		Steps: []resource.TestStep{
-			resource.TestStep{
+			{
 				Config: testAccCiscoAsaNetworkServiceGroup,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoAsaNetworkServiceGroupExists([]string{
@@ -26,18 +26,18 @@ func TestAccCiscoASANetworkServiceGroup(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_network_service_group.srvgrp_mixed", "members.#", "4"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_mixed", "members.1318937322", "tcp/80"),
+						"ciscoasa_network_service_group.srvgrp_mixed", "members.2", "tcp/80"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_mixed", "members.2028646336", "tcp/6001-6500"),
+						"ciscoasa_network_service_group.srvgrp_mixed", "members.1", "tcp/6001-6500"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_mixed", "members.3592067446", "udp/53"),
+						"ciscoasa_network_service_group.srvgrp_mixed", "members.3", "udp/53"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_mixed", "members.1524852438", "icmp/0"),
+						"ciscoasa_network_service_group.srvgrp_mixed", "members.0", "icmp/0"),
 
 					resource.TestCheckResourceAttr(
 						"ciscoasa_network_service_group.srvgrp_nested", "members.#", "2"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_nested", "members.2453335262", "icmp/8"),
+						"ciscoasa_network_service_group.srvgrp_nested", "members.0", "icmp/8"),
 				),
 			},
 		},

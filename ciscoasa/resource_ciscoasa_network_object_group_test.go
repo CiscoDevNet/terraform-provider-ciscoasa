@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -15,7 +15,7 @@ func TestAccCiscoASANetworkObjectGroup(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckCiscsoAsaNetworkObjectGroupDestroy,
 		Steps: []resource.TestStep{
-			resource.TestStep{
+			{
 				Config: testAccCiscoAsaNetworkObjectGroup,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoAsaNetworkObjectGroupExists([]string{
@@ -25,15 +25,15 @@ func TestAccCiscoASANetworkObjectGroup(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_network_object_group.objgrp_mixed", "members.#", "3"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_object_group.objgrp_mixed", "members.1086291305", "192.168.10.15"),
+						"ciscoasa_network_object_group.objgrp_mixed", "members.1", "192.168.10.15"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_object_group.objgrp_mixed", "members.2041400964", "10.5.10.0/24"),
+						"ciscoasa_network_object_group.objgrp_mixed", "members.0", "10.5.10.0/24"),
 					resource.TestCheckResourceAttr(
 						"ciscoasa_network_object_group.objgrp_nested", "members.#", "3"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_object_group.objgrp_nested", "members.3744480902", "192.168.20.14"),
+						"ciscoasa_network_object_group.objgrp_nested", "members.1", "192.168.20.14"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_object_group.objgrp_nested", "members.233334120", "10.25.10.0/24"),
+						"ciscoasa_network_object_group.objgrp_nested", "members.0", "10.25.10.0/24"),
 				),
 			},
 		},

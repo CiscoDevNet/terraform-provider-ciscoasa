@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -17,34 +17,34 @@ func resourceCiscoASAStaticRoute() *schema.Resource {
 		Delete: resourceCiscoASAStaticRouteDelete,
 
 		Schema: map[string]*schema.Schema{
-			"interface": &schema.Schema{
+			"interface": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"network": &schema.Schema{
+			"network": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"gateway": &schema.Schema{
+			"gateway": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"metric": &schema.Schema{
+			"metric": {
 				Type:     schema.TypeInt,
 				Optional: true,
 				Default:  1,
 			},
 
-			"tracked": &schema.Schema{
+			"tracked": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  false,
 			},
 
-			"tunneled": &schema.Schema{
+			"tunneled": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  false,
