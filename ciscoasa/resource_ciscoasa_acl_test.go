@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -15,7 +15,7 @@ func TestAccCiscoASAACL_basic(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckCiscsoASAACLDestroy,
 		Steps: []resource.TestStep{
-			resource.TestStep{
+			{
 				Config: testAccCiscoASAACL_basic,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoASAACLExists("ciscoasa_acl.foo"),
@@ -65,7 +65,7 @@ func TestAccCiscoASAACL_update(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckCiscsoASAACLDestroy,
 		Steps: []resource.TestStep{
-			resource.TestStep{
+			{
 				Config: testAccCiscoASAACL_basic,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoASAACLExists("ciscoasa_acl.foo"),
@@ -106,7 +106,7 @@ func TestAccCiscoASAACL_update(t *testing.T) {
 				),
 			},
 
-			resource.TestStep{
+			{
 				Config: testAccCiscoASAACL_update,
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCiscoASAACLExists("ciscoasa_acl.foo"),

@@ -5,46 +5,46 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
 var aclRule = &schema.Resource{
 	Schema: map[string]*schema.Schema{
-		"source": &schema.Schema{
+		"source": {
 			Type:     schema.TypeString,
 			Required: true,
 		},
 
-		"source_service": &schema.Schema{
+		"source_service": {
 			Type:     schema.TypeString,
 			Optional: true,
 		},
 
-		"destination": &schema.Schema{
+		"destination": {
 			Type:     schema.TypeString,
 			Required: true,
 		},
 
-		"destination_service": &schema.Schema{
+		"destination_service": {
 			Type:     schema.TypeString,
 			Required: true,
 		},
 
-		"active": &schema.Schema{
+		"active": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
 		},
 
-		"log_interval": &schema.Schema{
+		"log_interval": {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  300,
 		},
 
-		"log_status": &schema.Schema{
+		"log_status": {
 			Type:     schema.TypeString,
 			Optional: true,
 			Default:  "Default",
@@ -55,19 +55,19 @@ var aclRule = &schema.Resource{
 			),
 		},
 
-		"permit": &schema.Schema{
+		"permit": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
 		},
 
-		"remarks": &schema.Schema{
+		"remarks": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 		},
 
-		"id": &schema.Schema{
+		"id": {
 			Type:     schema.TypeString,
 			Computed: true,
 		},
@@ -82,13 +82,13 @@ func resourceCiscoASAACL() *schema.Resource {
 		Delete: resourceCiscoASAACLDelete,
 
 		Schema: map[string]*schema.Schema{
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"rule": &schema.Schema{
+			"rule": {
 				Type:     schema.TypeList,
 				Required: true,
 				Elem:     aclRule,

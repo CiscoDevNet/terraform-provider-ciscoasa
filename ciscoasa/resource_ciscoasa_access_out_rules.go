@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
@@ -17,56 +17,56 @@ func resourceCiscoASAAccessOutRules() *schema.Resource {
 		Delete: resourceCiscoASAAccessOutRulesDelete,
 
 		Schema: map[string]*schema.Schema{
-			"interface": &schema.Schema{
+			"interface": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"managed": &schema.Schema{
+			"managed": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  false,
 			},
 
-			"rule": &schema.Schema{
+			"rule": {
 				Type:     schema.TypeSet,
 				Required: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"source": &schema.Schema{
+						"source": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"source_service": &schema.Schema{
+						"source_service": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"destination": &schema.Schema{
+						"destination": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"destination_service": &schema.Schema{
+						"destination_service": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"active": &schema.Schema{
+						"active": {
 							Type:     schema.TypeBool,
 							Optional: true,
 							Default:  true,
 						},
 
-						"permit": &schema.Schema{
+						"permit": {
 							Type:     schema.TypeBool,
 							Optional: true,
 							Default:  true,
 						},
 
-						"id": &schema.Schema{
+						"id": {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
