@@ -31,5 +31,5 @@ resource "ciscoasa_network_object" "ipv4_subnet" {
 
 The following arguments are supported:
 
-* `name` - (Required) The name of the group.
+* `name` - (Required) The name of the object.
 * `value` - (Required) The value representing the object. This can be a single host, a range of hosts (`<ip>-<ip>`), or a CIDR.
