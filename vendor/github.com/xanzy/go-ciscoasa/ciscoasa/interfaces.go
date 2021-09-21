@@ -26,17 +26,41 @@ type interfaceService struct {
 	*Client
 }
 
-// IPAddress represents an IPv4 address.
+// SlaTracking represents an SlaTracking Settings.
+type SlaTracking struct {
+	SlaId                   int    `json:"slaId"`
+	TrackedIP               string `json:"trackedIP"`
+	FrequencyInSeconds      int    `json:"frequencyInSeconds"`
+	DataSizeInBytes         int    `json:"dataSizeInBytes"`
+	ThresholdInMilliseconds int    `json:"thresholdInMilliseconds"`
+	ToS                     int    `json:"ToS"`
+	TimeoutInMilliseconds   int    `json:"timeoutInMilliseconds"`
+	NumPackets              int    `json:"numPackets"`
+}
+
+// DhcpClient represents an DHCP Settings.
+type DhcpClient struct {
+	SetDefaultRoute     bool         `json:"setDefaultRoute"`
+	Metric              int          `json:"metric"`
+	PrimaryTrackId      int          `json:"primaryTrackId"`
+	TrackingEnabled     bool         `json:"trackingEnabled"`
+	SlaTrackingSettings *SlaTracking `json:"slaTrackingSettings"`
+}
+
+// Address represents a static IPv4/IPv6 address settings.
+type Address struct {
+	Kind  string `json:"kind"`
+	Value string `json:"value"`
+}
+
+// IPAddress represents an IP address settings.
 type IPAddress struct {
-	IP struct {
-		Kind  string `json:"kind"`
-		Value string `json:"value"`
-	} `json:"ip"`
-	NetMask struct {
-		Kind  string `json:"kind"`
-		Value string `json:"value"`
-	} `json:"netMask"`
-	Kind string `json:"kind"`
+	IP                 *Address    `json:"ip,omitempty"`
+	NetMask            *Address    `json:"netMask,omitempty"`
+	Kind               string      `json:"kind"`
+	DhcpOptionUsingMac bool        `json:"dhcpOptionUsingMac,omitempty"`
+	DhcpBroadcast      bool        `json:"dhcpBroadcast,omitempty"`
+	DhcpClient         *DhcpClient `json:"dhcpClient,omitempty"`
 }
 
 // UnmarshalJSON implements json.Unmarshaler interface.
@@ -56,23 +80,44 @@ func (ip *IPAddress) String() string {
 	return ip.IP.Value + "/" + bitsize
 }
 
+// nDiscoveryPrefix represents an nDiscoveryPrefix list.
+type NDiscoveryPrefix struct {
+	OffLink           bool   `json:"offLink"`
+	NoAdvertise       bool   `json:"noAdvertise"`
+	PreferredLifetime int    `json:"preferredLifetime"`
+	ValidLifetime     int    `json:"validLifetime"`
+	HasDuration       bool   `json:"hasDuration"`
+	DefaultPrefix     bool   `json:"defaultPrefix"`
+	Kind              string `json:"kind"`
+}
+
+// Ipv6Address represents an Ipv6Address.
+type Ipv6Address struct {
+	PrefixLength int      `json:"prefixLength,omitempty"`
+	Standby      *Address `json:"standby,omitempty"`
+	Address      *Address `json:"address,omitempty"`
+	// IsEUI64      bool     `json:"isEUI64"`
+	Kind string `json:"kind"`
+}
+
 // IPv6Info represents an IPv6 address.
 type IPv6Info struct {
-	Enabled                  bool     `json:"enabled"`
-	AutoConfig               bool     `json:"autoConfig"`
-	EnforceEUI64             bool     `json:"enforceEUI64"`
-	ManagedAddressConfig     bool     `json:"managedAddressConfig"`
-	NsInterval               int      `json:"nsInterval"`
-	DadAttempts              int      `json:"dadAttempts"`
-	NDiscoveryPrefixList     []string `json:"nDiscoveryPrefixList"`
-	OtherStatefulConfig      bool     `json:"otherStatefulConfig"`
-	RouterAdvertInterval     int      `json:"routerAdvertInterval"`
-	RouterAdvertIntervalUnit string   `json:"routerAdvertIntervalUnit"`
-	RouterAdvertLifetime     int      `json:"routerAdvertLifetime"`
-	SuppressRouterAdvert     bool     `json:"suppressRouterAdvert"`
-	ReachableTime            int      `json:"reachableTime"`
-	Ipv6Addresses            []string `json:"ipv6Addresses"`
-	Kind                     string   `json:"kind"`
+	Enabled                  bool                `json:"enabled"`
+	AutoConfig               bool                `json:"autoConfig"`
+	EnforceEUI64             bool                `json:"enforceEUI64"`
+	ManagedAddressConfig     bool                `json:"managedAddressConfig"`
+	NsInterval               int                 `json:"nsInterval"`
+	DadAttempts              int                 `json:"dadAttempts"`
+	NDiscoveryPrefixList     []*NDiscoveryPrefix `json:"nDiscoveryPrefixList,omitempty"`
+	OtherStatefulConfig      bool                `json:"otherStatefulConfig"`
+	RouterAdvertInterval     int                 `json:"routerAdvertInterval"`
+	RouterAdvertIntervalUnit string              `json:"routerAdvertIntervalUnit"`
+	RouterAdvertLifetime     int                 `json:"routerAdvertLifetime"`
+	SuppressRouterAdvert     bool                `json:"suppressRouterAdvert"`
+	ReachableTime            int                 `json:"reachableTime"`
+	LinkLocalAddress         *Ipv6Address        `json:"linkLocalAddress,omitempty"`
+	Ipv6Addresses            []*Ipv6Address      `json:"ipv6Addresses,omitempty"`
+	Kind                     string              `json:"kind"`
 }
 
 // UnmarshalJSON implements json.Unmarshaler interface.
