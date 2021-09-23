@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/xanzy/go-ciscoasa/ciscoasa"
+	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 )
 
 func resourceCiscoASANetworkObjectGroup() *schema.Resource {
