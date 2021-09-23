@@ -49,6 +49,7 @@ type Client struct {
 	Interfaces *interfaceService
 	Objects    *objectsService
 	Routing    *routingService
+	Save       *saveService
 }
 
 // ErrorResponse represents an error response
@@ -115,6 +116,7 @@ func NewClient(apiURL, username, password string, sslNoVerify bool) (*Client, er
 	c.Interfaces = &interfaceService{c}
 	c.Objects = &objectsService{c}
 	c.Routing = &routingService{c}
+	c.Save = &saveService{c}
 
 	return c, nil
 }

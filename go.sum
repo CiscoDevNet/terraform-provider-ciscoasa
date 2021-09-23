@@ -329,6 +329,10 @@ github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpO
 github.com/huandu/xstrings v1.3.2 h1:L18LIDzqlW6xN2rEkpdV8+oL/IXWJ1APd+vsdYy4Wdw=
 github.com/huandu/xstrings v1.3.2/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
+github.com/id27182/go-ciscoasa v0.2.3 h1:DwAgpKu8sjtarNhlQE5MepBPHTLYpgFGuImBurhMtvM=
+github.com/id27182/go-ciscoasa v0.2.3/go.mod h1:xSivovafp49vpa2ylg3h9SOr8oAhooKdKj/Zk+YsD9s=
+github.com/id27182/go-ciscoasa v0.2.4 h1:suI72OuimXKxHWzeGKceLbTr8kB2U87UK8JTVmaSA2g=
+github.com/id27182/go-ciscoasa v0.2.4/go.mod h1:xSivovafp49vpa2ylg3h9SOr8oAhooKdKj/Zk+YsD9s=
 github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=

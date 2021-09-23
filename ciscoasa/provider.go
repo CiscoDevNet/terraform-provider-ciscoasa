@@ -49,6 +49,7 @@ func Provider() *schema.Provider {
 			"ciscoasa_network_object_group":  resourceCiscoASANetworkObjectGroup(),
 			"ciscoasa_network_service_group": resourceCiscoASANetworkServiceGroup(),
 			"ciscoasa_static_route":          resourceCiscoASAStaticRoute(),
+			"ciscoasa_write_memory": 		  resourceCiscoASAWriteMemory(),
 		},
 
 		ConfigureFunc: providerConfigure,
