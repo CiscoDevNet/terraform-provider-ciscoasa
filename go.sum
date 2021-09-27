@@ -335,6 +335,8 @@ github.com/id27182/go-ciscoasa v0.2.4 h1:suI72OuimXKxHWzeGKceLbTr8kB2U87UK8JTVma
 github.com/id27182/go-ciscoasa v0.2.4/go.mod h1:xSivovafp49vpa2ylg3h9SOr8oAhooKdKj/Zk+YsD9s=
 github.com/id27182/go-ciscoasa v0.2.5 h1:JHkZIAa5d8dDFg+AhfDCfPimXGklqdQ496A9vF/rUwA=
 github.com/id27182/go-ciscoasa v0.2.5/go.mod h1:nHysBhPWi777CjOSrwBb0oFAA4Vtrnz+Km4cB7/9vdg=
+github.com/id27182/go-ciscoasa v0.2.6 h1:uFn0NW48BWtP28Nzwe3jEqIERYUptrG0IZoiqSlaee8=
+github.com/id27182/go-ciscoasa v0.2.6/go.mod h1:nHysBhPWi777CjOSrwBb0oFAA4Vtrnz+Km4cB7/9vdg=
 github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=

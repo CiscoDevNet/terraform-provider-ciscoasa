@@ -57,7 +57,7 @@ func (s *accessService) ListAccessInRules(iface string) (*ExtendedACEObjectColle
 }
 
 // CreateAccessInRule creates an access control element.
-func (s *accessService) CreateAccessInRule(iface, src, srcService, dst, dstService string, active, permit bool) (string, error) {
+func (s *accessService) CreateAccessInRule(iface, src, srcService, dst, dstService, timeRange string, active, permit bool) (string, error) {
 	u := fmt.Sprintf("/api/access/in/%s/rules", iface)
 
 	e := &ExtendedACEObject{
@@ -78,6 +78,14 @@ func (s *accessService) CreateAccessInRule(iface, src, srcService, dst, dstServi
 	}
 	if e.DstService, err = s.Objects.objectFromService(dstService); err != nil {
 		return "", err
+	}
+
+	if timeRange != "" {
+		t := &TimeRange{
+			ObjectID: timeRange,
+			Kind:     "objectRef#TimeRange",
+		}
+		e.TimeRange = t
 	}
 
 	req, err := s.newRequest("POST", u, e)
@@ -109,7 +117,7 @@ func (s *accessService) GetAccessInRule(iface string, ruleID string) (*ExtendedA
 }
 
 // UpdateAccessInRule updates an access control element.
-func (s *accessService) UpdateAccessInRule(iface, ruleID, src, srcService, dst, dstService string, active, permit bool) (string, error) {
+func (s *accessService) UpdateAccessInRule(iface, ruleID, src, srcService, dst, dstService, timeRange string, active, permit bool) (string, error) {
 	u := fmt.Sprintf("/api/access/in/%s/rules/%s", iface, ruleID)
 
 	e := &ExtendedACEObject{
@@ -122,7 +130,7 @@ func (s *accessService) UpdateAccessInRule(iface, ruleID, src, srcService, dst, 
 	if e.SrcAddress, err = s.Objects.objectFromAddress(src); err != nil {
 		return "", err
 	}
-	if e.SrcService, err = s.Objects.objectFromService(src); err != nil {
+	if e.SrcService, err = s.Objects.objectFromService(srcService); err != nil {
 		return "", err
 	}
 	if e.DstAddress, err = s.Objects.objectFromAddress(dst); err != nil {
@@ -132,7 +140,15 @@ func (s *accessService) UpdateAccessInRule(iface, ruleID, src, srcService, dst, 
 		return "", err
 	}
 
-	req, err := s.newRequest("POST", u, e)
+	if timeRange != "" {
+		t := &TimeRange{
+			ObjectID: timeRange,
+			Kind:     "objectRef#TimeRange",
+		}
+		e.TimeRange = t
+	}
+
+	req, err := s.newRequest("PUT", u, e)
 	if err != nil {
 		return "", err
 	}

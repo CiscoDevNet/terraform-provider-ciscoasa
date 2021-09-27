@@ -26,6 +26,13 @@ type interfaceService struct {
 	*Client
 }
 
+type InterfaceRef struct {
+	Kind     string `json:"kind"`
+	RefLink  string `json:"refLink,omitempty"`
+	ObjectId string `json:"objectId,omitempty"`
+	Name     string `json:"name,omitempty"`
+}
+
 // SlaTracking represents an SlaTracking Settings.
 type SlaTracking struct {
 	SlaId                   int    `json:"slaId"`

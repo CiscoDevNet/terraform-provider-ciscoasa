@@ -13,4 +13,4 @@ require (
 	github.com/CiscoDevNet/go-ciscoasa v0.2.3
 )
 
-replace github.com/CiscoDevNet/go-ciscoasa v0.2.3 => github.com/id27182/go-ciscoasa v0.2.5
+replace github.com/CiscoDevNet/go-ciscoasa v0.2.3 => github.com/id27182/go-ciscoasa v0.2.6

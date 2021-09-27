@@ -8,7 +8,7 @@ cloud.google.com/go/internal/trace
 cloud.google.com/go/internal/version
 # cloud.google.com/go/storage v1.10.0
 cloud.google.com/go/storage
-# github.com/CiscoDevNet/go-ciscoasa v0.2.3 => github.com/id27182/go-ciscoasa v0.2.5
+# github.com/CiscoDevNet/go-ciscoasa v0.2.3 => github.com/id27182/go-ciscoasa v0.2.6
 ## explicit
 github.com/CiscoDevNet/go-ciscoasa/ciscoasa
 # github.com/agext/levenshtein v1.2.2

@@ -49,6 +49,7 @@ type ExtendedACEObject struct {
 	DstAddress   *AddressObject `json:"destinationAddress,omitempty"`
 	DstService   *ServiceObject `json:"destinationService,omitempty"`
 	RuleLogging  *RuleLogging   `json:"ruleLogging,omitempty"`
+	TimeRange    *TimeRange     `json:"timeRange,omitempty"`
 	Position     int            `json:"position,omitempty"`
 	Permit       bool           `json:"permit,omitempty"`
 	Active       bool           `json:"active"`
