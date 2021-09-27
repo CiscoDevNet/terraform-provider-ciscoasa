@@ -30,6 +30,8 @@ testinfra-testacc:
 	CISCOASA_SSLNOVERIFY=true \
 	CISCOASA_OBJECT_PREFIX=acc \
 	CISCOASA_INTERFACE_NAME=inside \
+	CISCOASA_INTERFACE_HW_ID_BASE=TenGigabitEthernet0 \
+	CISCOASA_INTERFACE_HW_IDS="1,2" \
 	CISCOASA_USERNAME="$$(cd testinfra; terraform output asav_username)" \
 	CISCOASA_PASSWORD="$$(cd testinfra; terraform output asav_password)" \
 	CISCOASA_API_URL="https://$$(cd testinfra; terraform output asav_public_ip)" \

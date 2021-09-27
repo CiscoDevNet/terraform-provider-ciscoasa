@@ -157,7 +157,6 @@ The following arguments are supported:
 * `link_local_address` - (Optional) One `link_local_address` element as defined below
 * `ipv6_addresses` - (Optional) One `ipv6_addresses` element as defined below
 * `managed_address_config` - (Required) Managed address configuration flag
-* `ipv6_addresses` - (Optional) One `ipv6_addresses` element as defined below
 * `ns_interval` - (Required) Neighbor solicitation retransmit interval. Range is from 1000 msec to 3600000 msec. Default is 1000
 * `other_stateful_config` - (Required) Other stateful configuration flag
 * `reachable_time` - (Required) Reachable time. Range is from 0 sec to 3600000 msec. Default is 0

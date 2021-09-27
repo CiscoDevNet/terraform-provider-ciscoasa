@@ -45,10 +45,15 @@ type Client struct {
 	password  string
 	pageLimit int
 
-	Access     *accessService
-	Interfaces *interfaceService
-	Objects    *objectsService
-	Routing    *routingService
+	Access      *accessService
+	Interfaces  *interfaceService
+	Objects     *objectsService
+	Routing     *routingService
+	DeviceSetup *devicesetupService
+	Dhcp        *dhcpService
+	Nat         *natService
+	Failover    *failoverService
+	Licensing   *licenseService
 }
 
 // ErrorResponse represents an error response
@@ -97,13 +102,13 @@ func NewClient(apiURL, username, password string, sslNoVerify bool) (*Client, er
 			Transport: &http.Transport{
 				Proxy: http.ProxyFromEnvironment,
 				Dial: (&net.Dialer{
-					Timeout:   30 * time.Second,
+					Timeout:   300 * time.Second,
 					KeepAlive: 30 * time.Second,
 				}).Dial,
 				TLSClientConfig:     &tls.Config{InsecureSkipVerify: sslNoVerify},
-				TLSHandshakeTimeout: 10 * time.Second,
+				TLSHandshakeTimeout: 180 * time.Second,
 			},
-			Timeout: 60 * time.Second,
+			Timeout: 300 * time.Second,
 		},
 		baseURL:   baseURL,
 		username:  username,
@@ -115,6 +120,11 @@ func NewClient(apiURL, username, password string, sslNoVerify bool) (*Client, er
 	c.Interfaces = &interfaceService{c}
 	c.Objects = &objectsService{c}
 	c.Routing = &routingService{c}
+	c.DeviceSetup = &devicesetupService{c}
+	c.Dhcp = &dhcpService{c}
+	c.Nat = &natService{c}
+	c.Failover = &failoverService{c}
+	c.Licensing = &licenseService{c}
 
 	return c, nil
 }
@@ -258,6 +268,7 @@ var protocolDefinitions = map[string]*protocolDefinition{
 	"udp":             {"udp", "Udp", "TcpUdpService"},
 	"tcpudp":          {"tcp-udp", "TcpUdp", "TcpUdpService"},
 	"icmp":            {"icmp", "Icmp", "ICMPService"},
+	"icmp6":           {"icmp", "Icmp6", "ICMP6Service"},
 	"ip":              {"ip", "Ip", "IPService"},
 	"networkprotocol": {"networkprotocol", "Protocol", "NetworkProtocol"},
 }
@@ -279,4 +290,31 @@ func idFromResponse(resp *http.Response) (string, error) {
 	}
 
 	return loc, nil
+}
+
+// Backup represents a backup.
+type Backup struct {
+	Context    string `json:"context,omitempty"`
+	Location   string `json:"location"`
+	Passphrase string `json:"passphrase,omitempty"`
+}
+
+// CreateBackup creates a backup.
+func (c *Client) CreateBackup(context, location, passphrase string) error {
+	u := "/api/backup"
+
+	r := &Backup{
+		Context:    context,
+		Location:   location,
+		Passphrase: passphrase,
+	}
+
+	req, err := c.newRequest("POST", u, r)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req, nil)
+
+	return err
 }

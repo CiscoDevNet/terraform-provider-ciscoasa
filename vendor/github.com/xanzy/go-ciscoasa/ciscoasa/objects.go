@@ -26,6 +26,13 @@ import (
 type objectsService struct {
 	*Client
 }
+type Periodic struct {
+	Frequency   string `json:"frequency"`
+	StartHour   int    `json:"startHour"`
+	StartMinute int    `json:"startMinute"`
+	EndHour     int    `json:"endHour"`
+	EndMinute   int    `json:"endMinute"`
+}
 
 func (s *objectsService) objectFromAddress(address string) (*AddressObject, error) {
 	if address == "" {
@@ -100,6 +107,35 @@ func (s *objectsService) objectFromService(service string) (*ServiceObject, erro
 
 	o.Kind = p.Kind
 	o.Value = fmt.Sprintf("%s/%s", p.Prefix, parts[1])
+
+	return o, nil
+}
+
+var regexpService = regexp.MustCompile(`^<?(tcp|udp|tcpudp|icmp6?)?(/)?[a-zA-Z0-9_]*(,)?.*`)
+
+func (s *objectsService) kindFromService(service string) (*ServiceObject, error) {
+
+	o := &ServiceObject{}
+
+	submatches := regexpService.FindStringSubmatch(service)
+
+	if protocol := submatches[1]; protocol != "" {
+		p, err := protocolFromValue(protocol)
+		if err != nil {
+			return nil, err
+		}
+		o.Kind = fmt.Sprintf("object#%sObj", p.Kind)
+	} else {
+		o.Kind = "object#NetworkProtocolObj"
+	}
+
+	protoDelim, srcDelim := submatches[2], submatches[3]
+	if protoDelim == "" && srcDelim == "," {
+		parts := strings.SplitN(service, ",", 2)
+		o.Value = fmt.Sprintf("%s/1-65535,%s", parts[0], parts[1])
+	} else {
+		o.Value = service
+	}
 
 	return o, nil
 }
