@@ -7,8 +7,8 @@ import (
 
 	"net"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func Provider() *schema.Provider {
@@ -63,7 +63,7 @@ func Provider() *schema.Provider {
 			"ciscoasa_license_register":          resourceCiscoASALicenseRegister(),
 			"ciscoasa_license_renewauth":         resourceCiscoASALicenseRenewAuth(),
 			"ciscoasa_license_renewid":           resourceCiscoASALicenseRenewId(),
-			"ciscoasa_write_memory": 		  	  resourceCiscoASAWriteMemory(),
+			"ciscoasa_write_memory":              resourceCiscoASAWriteMemory(),
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func resourceCiscoASAWriteMemory() * schema.Resource {
+func resourceCiscoASAWriteMemory() *schema.Resource {
 	return &schema.Resource{
 		Description: `The ` + "`null_resource`" + ` resource implements the standard resource lifecycle but takes no further action.
 The ` + "`triggers`" + ` argument allows specifying an arbitrary set of values that, when changed, will cause the resource to be replaced.`,
@@ -41,7 +41,6 @@ func resourceCiscoASAWriteMemoryCreate(d *schema.ResourceData, meta interface{})
 	if err != nil {
 		return fmt.Errorf("Error saving changes: %v", err)
 	}
-
 
 	d.SetId(fmt.Sprintf("%d", rand.Int()))
 

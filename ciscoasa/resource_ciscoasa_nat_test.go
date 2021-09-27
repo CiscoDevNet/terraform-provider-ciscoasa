@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 )
 
 func TestAccCiscoASANat_basic(t *testing.T) {
