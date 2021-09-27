@@ -435,7 +435,7 @@ func resourceCiscoASAPhysicalInterfaceCreate(d *schema.ResourceData, meta interf
 
 	var err error
 
-	objectID := strings.Replace(d.Get("hardware_id").(string), "/", "_API_SLASH_", 1)
+	objectID := objectIdFromHwId(d.Get("hardware_id").(string))
 
 	hardwareID := d.Get("hardware_id").(string)
 

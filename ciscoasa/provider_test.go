@@ -11,8 +11,6 @@ import (
 var testAccProviders map[string]*schema.Provider
 var testAccProvider *schema.Provider
 
-var CISCOASA_INTERFACE_HW_IDS = []string{"0", "1"}
-
 func init() {
 	testAccProvider = Provider()
 	testAccProviders = map[string]*schema.Provider{
@@ -49,8 +47,8 @@ func testAccPreCheck(t *testing.T) {
 	if v := os.Getenv("CISCOASA_INTERFACE_HW_ID_BASE"); v == "" {
 		t.Fatal("CISCOASA_INTERFACE_HW_ID_BASE must be set for acceptance tests")
 	}
-	if v := os.Getenv("CISCOASA_INTERFACE_HW_IDS"); v != "" {
-		CISCOASA_INTERFACE_HW_IDS = strings.Split(v, ",")
+	if v := os.Getenv("CISCOASA_INTERFACE_HW_IDS"); v == "" || len(strings.Split(v, ",")) < 2 {
+		t.Fatal("CISCOASA_INTERFACE_HW_IDS must be set for acceptance tests")
 	}
 }
 
@@ -62,3 +60,6 @@ var CISCOASA_INTERFACE_NAME = os.Getenv("CISCOASA_INTERFACE_NAME")
 
 // The physical interface ID base of an existing interface, e.g. 'TenGigabitEthernet0'
 var CISCOASA_INTERFACE_HW_ID_BASE = os.Getenv("CISCOASA_INTERFACE_HW_ID_BASE")
+
+// Comma separated physical interface IDs of an existing interface, e.g. '1,2'
+var CISCOASA_INTERFACE_HW_IDS = strings.Split(os.Getenv("CISCOASA_INTERFACE_HW_IDS"), ",")

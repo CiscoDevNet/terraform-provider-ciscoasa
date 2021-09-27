@@ -37,7 +37,7 @@ func TestAccCiscoASANetworkServiceGroup(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ciscoasa_network_service_group.srvgrp_nested", "members.#", "2"),
 					resource.TestCheckResourceAttr(
-						"ciscoasa_network_service_group.srvgrp_nested", "members.0", "icmp/8"),
+						"ciscoasa_network_service_group.srvgrp_nested", "members.0", "acc_srvgrp_mixed"),
 				),
 			},
 		},

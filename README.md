@@ -18,17 +18,17 @@ Requirements
 Building The Provider
 ---------------------
 
-Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-ciscoasa`
+Clone repository to: `$GOPATH/src/github.com/CiscoDevNet/terraform-provider-ciscoasa`
 
 ```sh
 $ mkdir -p $GOPATH/src/github.com/terraform-providers; cd $GOPATH/src/github.com/terraform-providers
-$ git clone git@github.com:terraform-providers/terraform-provider-ciscoasa
+$ git clone git@github.com:CiscoDevNet/terraform-provider-ciscoasa
 ```
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-ciscoasa
+$ cd $GOPATH/src/github.com/CiscoDevNet/terraform-provider-ciscoasa
 $ make build
 ```
 
@@ -59,6 +59,28 @@ In order to test the provider, you can simply run `make test`.
 
 ```sh
 $ make test
+```
+
+In order to run the Acceptance tests:
+1. Prepare environment with Cisco ASA instance and Rest API installed and configured (check `testinfra` folder for Terraform configs example) 
+2. Check/export necessary Environment Variables
+3. Run `make testinfra-testacc`.
+
+The list of current available Environment Variables:
+
+|EnvVar|Default value|Usage|
+|---|---|---|
+|CISCOASA_SSLNOVERIFY|`true`|Skip SSL verification on connection to Cisco ASA API|
+|CISCOASA_OBJECT_PREFIX|`acc`|Prefix for objects created by tests|
+|CISCOASA_INTERFACE_NAME|`inside`|Named interface which will be used in tests|
+|CISCOASA_INTERFACE_HW_ID_BASE|`TenGigabitEthernet0`|Base part of Interface Hardware ID|
+|CISCOASA_INTERFACE_HW_IDS|`1,2`|Interfaces Hardware ID indexes|
+|CISCOASA_USERNAME|`$(cd testinfra; terraform output asav_username)`|Username for Cisco ASA API|
+|CISCOASA_PASSWORD|`$(cd testinfra; terraform output asav_password)`|Password for Cisco ASA API|
+|CISCOASA_API_URL|`https://$(cd testinfra; terraform output asav_public_ip)`|URL for Cisco ASA API|
+
+```sh
+$ make testinfra-testacc
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.

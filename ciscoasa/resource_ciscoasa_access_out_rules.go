@@ -1,9 +1,11 @@
 package ciscoasa
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"strings"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
@@ -11,10 +13,11 @@ import (
 
 func resourceCiscoASAAccessOutRules() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCiscoASAAccessOutRulesCreate,
-		Read:   resourceCiscoASAAccessOutRulesRead,
-		Update: resourceCiscoASAAccessOutRulesUpdate,
-		Delete: resourceCiscoASAAccessOutRulesDelete,
+		Create:        resourceCiscoASAAccessOutRulesCreate,
+		Read:          resourceCiscoASAAccessOutRulesRead,
+		Update:        resourceCiscoASAAccessOutRulesUpdate,
+		Delete:        resourceCiscoASAAccessOutRulesDelete,
+		CustomizeDiff: resourceCiscoASAAccessOutRulesDiff,
 
 		Schema: map[string]*schema.Schema{
 			"interface": {
@@ -30,7 +33,7 @@ func resourceCiscoASAAccessOutRules() *schema.Resource {
 			},
 
 			"rule": {
-				Type:     schema.TypeSet,
+				Type:     schema.TypeList,
 				Required: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
@@ -66,6 +69,11 @@ func resourceCiscoASAAccessOutRules() *schema.Resource {
 							Default:  true,
 						},
 
+						"time_range": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
 						"id": {
 							Type:     schema.TypeString,
 							Computed: true,
@@ -73,36 +81,69 @@ func resourceCiscoASAAccessOutRules() *schema.Resource {
 					},
 				},
 			},
+			"last_updated": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 		},
 	}
 }
 
+func resourceCiscoASAAccessOutRulesDiff(_ context.Context, d *schema.ResourceDiff, meta interface{}) error {
+	o, n := d.GetChange("rule")
+	if len(o.([]interface{})) != len(n.([]interface{})) {
+		d.ForceNew("rule")
+		return nil
+	}
+
+	return nil
+}
+
 func resourceCiscoASAAccessOutRulesCreate(d *schema.ResourceData, meta interface{}) error {
+	ca := meta.(*ciscoasa.Client)
+
 	// We need to set this upfront in order to be able to save a partial state
 	d.SetId(d.Get("interface").(string))
 
 	// Create all rules that are configured
-	if nrs := d.Get("rule").(*schema.Set); nrs.Len() > 0 {
-		// Create an empty rule set to hold all newly created rules
-		rules := resourceCiscoASAAccessOutRules().Schema["rule"].ZeroValue().(*schema.Set)
+	if nrs := d.Get("rule").([]interface{}); len(nrs) > 0 {
+		// Create an empty rule list to hold all newly created rules
+		rules := resourceCiscoASAAccessOutRules().Schema["rule"].ZeroValue().([]interface{})
 
-		err := createCiscoASAAccessOutRulesRules(meta, d.Id(), rules, nrs)
+		for _, rule := range nrs {
+			rule := rule.(map[string]interface{})
 
-		// We need to update this first to preserve the correct state
-		d.Set("rule", rules)
+			id, err := ca.Access.CreateAccessOutRule(
+				d.Id(),
+				cidrToAddress(rule["source"].(string)),
+				rule["source_service"].(string),
+				cidrToAddress(rule["destination"].(string)),
+				rule["destination_service"].(string),
+				rule["time_range"].(string),
+				rule["active"].(bool),
+				rule["permit"].(bool),
+			)
 
-		if err != nil {
-			return err
+			if err != nil {
+				return fmt.Errorf("Error creating ACE on interface %s: %v", d.Id(), err)
+			}
+
+			rule["id"] = id
+			rules = append(rules, rule)
+
+			// We need to update this first to preserve the correct state
+			d.Set("rule", rules)
 		}
 	}
 
 	return resourceCiscoASAAccessOutRulesRead(d, meta)
 }
 
-func createCiscoASAAccessOutRulesRules(meta interface{}, iface string, rules *schema.Set, nrs *schema.Set) error {
+func createCiscoASAAccessOutRulesRules(meta interface{}, iface string, rules []interface{}, nrs []interface{}) ([]interface{}, error) {
 	ca := meta.(*ciscoasa.Client)
 
-	for _, rule := range nrs.List() {
+	for _, rule := range nrs {
 		rule := rule.(map[string]interface{})
 
 		id, err := ca.Access.CreateAccessOutRule(
@@ -111,18 +152,19 @@ func createCiscoASAAccessOutRulesRules(meta interface{}, iface string, rules *sc
 			rule["source_service"].(string),
 			cidrToAddress(rule["destination"].(string)),
 			rule["destination_service"].(string),
+			rule["time_range"].(string),
 			rule["active"].(bool),
 			rule["permit"].(bool),
 		)
 		if err != nil {
-			return fmt.Errorf("Error creating ACE on interface %s: %v", iface, err)
+			return rules, fmt.Errorf("Error creating ACE on interface %s: %v", iface, err)
 		}
 
 		rule["id"] = id
-		rules.Add(rule)
+		rules = append(rules, rule)
 	}
 
-	return nil
+	return rules, nil
 }
 
 func resourceCiscoASAAccessOutRulesRead(d *schema.ResourceData, meta interface{}) error {
@@ -146,12 +188,12 @@ func resourceCiscoASAAccessOutRulesRead(d *schema.ResourceData, meta interface{}
 		ruleMap[r.ObjectID] = r
 	}
 
-	// Create an empty schema.Set to hold all rules
-	rules := resourceCiscoASAAccessOutRules().Schema["rule"].ZeroValue().(*schema.Set)
+	// Create an empty list to hold all rules
+	rules := resourceCiscoASAAccessOutRules().Schema["rule"].ZeroValue().([]interface{})
 
 	// Read all rules that are configured
-	if rs := d.Get("rule").(*schema.Set); rs.Len() > 0 {
-		for _, rule := range rs.List() {
+	if rs := d.Get("rule").([]interface{}); len(rs) > 0 {
+		for _, rule := range rs {
 			rule := rule.(map[string]interface{})
 			id := rule["id"].(string)
 
@@ -169,7 +211,7 @@ func resourceCiscoASAAccessOutRulesRead(d *schema.ResourceData, meta interface{}
 			rule["destination_service"] = r.DstService.String()
 			rule["active"] = r.Active
 			rule["permit"] = r.Permit
-			rules.Add(rule)
+			rules = append(rules, rule)
 		}
 	}
 
@@ -185,11 +227,11 @@ func resourceCiscoASAAccessOutRulesRead(d *schema.ResourceData, meta interface{}
 			rule["active"] = r.Active
 			rule["permit"] = r.Permit
 			rule["id"] = r.ObjectID
-			rules.Add(rule)
+			rules = append(rules, rule)
 		}
 	}
 
-	if rules.Len() > 0 {
+	if len(rules) > 0 {
 		d.Set("rule", rules)
 	} else if !managed {
 		d.SetId("")
@@ -202,82 +244,64 @@ func resourceCiscoASAAccessOutRulesUpdate(d *schema.ResourceData, meta interface
 	// Check if the rule set as a whole has changed
 	if d.HasChange("rule") {
 		o, n := d.GetChange("rule")
-		ors := o.(*schema.Set).Difference(n.(*schema.Set))
-		nrs := n.(*schema.Set).Difference(o.(*schema.Set))
+		// Create a list with old rules to track successfully updated rules
+		rules := o.([]interface{})
+		ca := meta.(*ciscoasa.Client)
 
-		// We need to start with a rule set containing all the rules we
-		// already have and want to keep. Any rules that are not deleted
-		// correctly and any newly created rules, will be added to this
-		// set to make sure we end up in a consistent state
-		rules := o.(*schema.Set).Intersection(n.(*schema.Set))
-
-		// First loop through all the new rules and create them
-		if nrs.Len() > 0 {
-			err := createCiscoASAAccessOutRulesRules(meta, d.Id(), rules, nrs)
-
-			// We need to update this first to preserve the correct state
-			d.Set("rule", rules)
-
+		for i, rule := range n.([]interface{}) {
+			rule := rule.(map[string]interface{})
+			id, err := ca.Access.UpdateAccessOutRule(
+				d.Id(),
+				rule["id"].(string),
+				cidrToAddress(rule["source"].(string)),
+				rule["source_service"].(string),
+				cidrToAddress(rule["destination"].(string)),
+				rule["destination_service"].(string),
+				rule["time_range"].(string),
+				rule["active"].(bool),
+				rule["permit"].(bool),
+			)
 			if err != nil {
-				return err
+				return fmt.Errorf("Error updating ACE on interface %s: %v", d.Id(), err)
 			}
+			rule["id"] = id
+			rules[i] = rule
+			d.Set("rule", rules)
 		}
 
-		// Then loop through all the old rules and remove them
-		if ors.Len() > 0 {
-			err := deleteCiscoASAAccessOutRulesRules(meta, d.Id(), rules, ors)
-
-			// We need to update this first to preserve the correct state
-			d.Set("rule", rules)
-
-			if err != nil {
-				return err
-			}
-		}
+		d.Set("last_updated", time.Now().Format(time.RFC850))
 	}
 
 	return resourceCiscoASAAccessOutRulesRead(d, meta)
 }
 
 func resourceCiscoASAAccessOutRulesDelete(d *schema.ResourceData, meta interface{}) error {
-	// Delete all rules
-	if ors := d.Get("rule").(*schema.Set); ors.Len() > 0 {
-		// Create an additional set with all the existing rules. Each rule that is
-		// succesfully deleted will be removed from this set, leaving only rules that
-		// could not be deleted properly and should be saved in the state.
-		rules := d.Get("rule").(*schema.Set)
-
-		err := deleteCiscoASAAccessOutRulesRules(meta, d.Id(), rules, ors)
-
-		// We need to update this first to preserve the correct state
-		d.Set("rule", rules)
-
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func deleteCiscoASAAccessOutRulesRules(meta interface{}, iface string, rules *schema.Set, ors *schema.Set) error {
 	ca := meta.(*ciscoasa.Client)
 
-	for _, rule := range ors.List() {
-		rule := rule.(map[string]interface{})
+	// Delete all rules
+	if ors := d.Get("rule").([]interface{}); len(ors) > 0 {
+		// Each rule that is successfully deleted will be removed
+		// from this list, leaving only rules that
+		// could not be deleted properly and should be saved in the state.
+		for i := 0; i < len(ors); i++ {
+			rule := ors[i].(map[string]interface{})
 
-		err := ca.Access.DeleteAccessOutRule(iface, rule["id"].(string))
-		if err != nil {
-			if strings.Contains(err.Error(), "RESOURCE-NOT-FOUND") {
-				log.Printf(
-					"[DEBUG] ACE %s from interface %s no longer exists", rule["id"].(string), iface)
-				continue
+			err := ca.Access.DeleteAccessOutRule(d.Id(), rule["id"].(string))
+			if err != nil {
+				if strings.Contains(err.Error(), "RESOURCE-NOT-FOUND") {
+					log.Printf(
+						"[DEBUG] ACE %s from interface %s no longer exists", rule["id"].(string), d.Id())
+					continue
+				}
+
+				// We need to update this first to preserve the correct state
+				d.Set("rule", ors)
+
+				return fmt.Errorf("Error deleting ACE %s from interface %s: %v", rule["id"].(string), d.Id(), err)
 			}
-
-			return fmt.Errorf("Error deleting ACE %s from interface %s: %v", rule["id"].(string), iface, err)
+			ors = append(ors[:i], ors[i+1:]...)
+			i--
 		}
-
-		rules.Remove(rule)
 	}
 
 	return nil

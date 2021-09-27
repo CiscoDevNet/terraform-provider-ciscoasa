@@ -1,0 +1,202 @@
+package ciscoasa
+
+import (
+	"fmt"
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
+)
+
+func TestAccCiscoASAFailoverSetup_basic(t *testing.T) {
+	resource.Test(t, resource.TestCase{
+		PreCheck:     func() { testAccPreCheck(t) },
+		Providers:    testAccProviders,
+		CheckDestroy: testAccCheckCiscsoASAFailoverSetupDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccCiscoFailoverSetup_basic,
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckCiscoASAFailoverSetupExists([]string{"ciscoasa_failover_setup.test"}),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "enable", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold", "10"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold_unit", "Percentage"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "lan_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_preferred_role", "secondary"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_primary_ip", "192.168.20.11"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_secondary_ip", "192.168.20.12"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "state_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_primary_ip", "192.168.20.11"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_secondary_ip", "192.168.20.12"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccCiscoASAFailoverSetup_update(t *testing.T) {
+	resource.Test(t, resource.TestCase{
+		PreCheck:     func() { testAccPreCheck(t) },
+		Providers:    testAccProviders,
+		CheckDestroy: testAccCheckCiscsoASAFailoverSetupDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccCiscoFailoverSetup_basic,
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckCiscoASAFailoverSetupExists([]string{"ciscoasa_failover_setup.test"}),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "enable", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold", "10"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold_unit", "Percentage"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "lan_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_preferred_role", "secondary"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_primary_ip", "192.168.20.11"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_secondary_ip", "192.168.20.12"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "state_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_primary_ip", "192.168.20.11"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_secondary_ip", "192.168.20.12"),
+				),
+			},
+			{
+				Config: testAccCiscoFailoverSetup_update,
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckCiscoASAFailoverSetupExists([]string{"ciscoasa_failover_setup.test"}),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "enable", "true"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold", "10"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "failed_interfaces_threshold_unit", "Percentage"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "lan_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_preferred_role", "secondary"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_primary_ip", "192.168.20.21"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "lan_secondary_ip", "192.168.20.22"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_failover_name", "test-fo"),
+					resource.TestCheckResourceAttrSet(
+						"ciscoasa_failover_setup.test", "state_interface_hw_id"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_net_mask", "255.255.255.0"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_primary_ip", "192.168.20.21"),
+					resource.TestCheckResourceAttr(
+						"ciscoasa_failover_setup.test", "state_secondary_ip", "192.168.20.22"),
+				),
+			},
+		},
+	})
+}
+
+func testAccCheckCiscoASAFailoverSetupExists(resnames []string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		for _, n := range resnames {
+			rs, ok := s.RootModule().Resources[n]
+			if !ok {
+				return fmt.Errorf("Not found: %s", n)
+			}
+
+			if rs.Primary.ID == "" {
+				return fmt.Errorf("FailoverSetup ID not set for %s", n)
+			}
+			ca := testAccProvider.Meta().(*ciscoasa.Client)
+			_, err := ca.Failover.GetFailoverSetup()
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+	}
+}
+
+func testAccCheckCiscsoASAFailoverSetupDestroy(s *terraform.State) error {
+	// There is no destroy available for this object, it will be there always. Hence just mocking destroy.
+	return nil
+}
+
+var testAccCiscoFailoverSetup_basic = fmt.Sprintf(`
+resource "ciscoasa_failover_setup" "test" {
+  enable                           = true
+  lan_interface_hw_id              = "%s/%s"
+  lan_failover_name                = "test-fo"
+  lan_primary_ip                   = "192.168.20.11"
+  lan_secondary_ip                 = "192.168.20.12"
+  lan_net_mask                     = "255.255.255.0"
+  lan_preferred_role               = "secondary"
+  state_interface_hw_id            = "%s/%s"
+  state_failover_name              = "test-fo"
+  state_primary_ip                 = "192.168.20.11"
+  state_secondary_ip               = "192.168.20.12"
+  state_net_mask                   = "255.255.255.0"
+  failed_interfaces_threshold      = "10"
+  failed_interfaces_threshold_unit = "Percentage"
+}`,
+	CISCOASA_INTERFACE_HW_ID_BASE,
+	CISCOASA_INTERFACE_HW_IDS[0],
+	CISCOASA_INTERFACE_HW_ID_BASE,
+	CISCOASA_INTERFACE_HW_IDS[0])
+
+var testAccCiscoFailoverSetup_update = fmt.Sprintf(`
+resource "ciscoasa_failover_setup" "test" {
+  enable                           = true
+  lan_interface_hw_id              = "%s/%s"
+  lan_failover_name                = "test-fo"
+  lan_primary_ip                   = "192.168.20.21"
+  lan_secondary_ip                 = "192.168.20.22"
+  lan_net_mask                     = "255.255.255.0"
+  lan_preferred_role               = "secondary"
+  state_interface_hw_id            = "%s/%s"
+  state_failover_name              = "test-fo"
+  state_primary_ip                 = "192.168.20.21"
+  state_secondary_ip               = "192.168.20.22"
+  state_net_mask                   = "255.255.255.0"
+  failed_interfaces_threshold      = "10"
+  failed_interfaces_threshold_unit = "Percentage"
+}`,
+	CISCOASA_INTERFACE_HW_ID_BASE,
+	CISCOASA_INTERFACE_HW_IDS[0],
+	CISCOASA_INTERFACE_HW_ID_BASE,
+	CISCOASA_INTERFACE_HW_IDS[0])

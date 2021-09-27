@@ -50,4 +50,5 @@ The following arguments are supported:
 * `active` - (Optional) Default `true`.
 * `permit` - (Optional) Default `true`.
 * `source_service` - (Optional)
+* `time_range` - (Optional)
 * `id` - (Computed)

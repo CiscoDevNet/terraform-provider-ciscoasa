@@ -40,16 +40,41 @@ func Provider() *schema.Provider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"ciscoasa_access_in_rules":       resourceCiscoASAAccessInRules(),
-			"ciscoasa_access_out_rules":      resourceCiscoASAAccessOutRules(),
-			"ciscoasa_interface_physical":    resourceCiscoASAPhysicalInterface(),
-			"ciscoasa_interface_vlan":        resourceCiscoASAVlanInterface(),
-			"ciscoasa_acl":                   resourceCiscoASAACL(),
-			"ciscoasa_network_object":        resourceCiscoASANetworkObject(),
-			"ciscoasa_network_object_group":  resourceCiscoASANetworkObjectGroup(),
-			"ciscoasa_network_service_group": resourceCiscoASANetworkServiceGroup(),
-			"ciscoasa_static_route":          resourceCiscoASAStaticRoute(),
-			"ciscoasa_write_memory": 		  resourceCiscoASAWriteMemory(),
+			"ciscoasa_access_in_rules":           resourceCiscoASAAccessInRules(),
+			"ciscoasa_access_out_rules":          resourceCiscoASAAccessOutRules(),
+			"ciscoasa_interface_physical":        resourceCiscoASAPhysicalInterface(),
+			"ciscoasa_interface_vlan":            resourceCiscoASAVlanInterface(),
+			"ciscoasa_acl":                       resourceCiscoASAACL(),
+			"ciscoasa_network_object":            resourceCiscoASANetworkObject(),
+			"ciscoasa_network_object_group":      resourceCiscoASANetworkObjectGroup(),
+			"ciscoasa_network_service":           resourceCiscoASANetworkService(),
+			"ciscoasa_network_service_group":     resourceCiscoASANetworkServiceGroup(),
+			"ciscoasa_static_route":              resourceCiscoASAStaticRoute(),
+			"ciscoasa_timerange":                 resourceCiscoASATimeRange(),
+			"ciscoasa_ntp_server":                resourceCiscoASANtpServer(),
+			"ciscoasa_dhcp_server":               resourceCiscoASADhcpServer(),
+			"ciscoasa_dhcp_relay_globalsettings": resourceCiscoASADhcpRelayGlobalsettings(),
+			"ciscoasa_dhcp_relay_local":          resourceCiscoASADhcpRelayLocal(),
+			"ciscoasa_backup":                    resourceCiscoASABackup(),
+			"ciscoasa_nat":                       resourceCiscoASANat(),
+			"ciscoasa_failover_interface":        resourceCiscoASAFailoverInterface(),
+			"ciscoasa_failover_setup":            resourceCiscoASAFailoverSetup(),
+			"ciscoasa_license_config":            resourceCiscoASALicenseConfig(),
+			"ciscoasa_license_register":          resourceCiscoASALicenseRegister(),
+			"ciscoasa_license_renewauth":         resourceCiscoASALicenseRenewAuth(),
+			"ciscoasa_license_renewid":           resourceCiscoASALicenseRenewId(),
+			"ciscoasa_write_memory": 		  	  resourceCiscoASAWriteMemory(),
+		},
+
+		DataSourcesMap: map[string]*schema.Resource{
+			"ciscoasa_interfaces_physical": dataSourceCiscoASAPhysicalInterfaces(),
+			"ciscoasa_interface_physical":  dataSourceCiscoASAPhysicalInterface(),
+			"ciscoasa_interface_vlan":      dataSourceCiscoASAVlanInterface(),
+			"ciscoasa_interfaces_vlan":     dataSourceCiscoASAVlanInterfaces(),
+			"ciscoasa_network_object":      dataSourceCiscoASANetworkObject(),
+			"ciscoasa_network_objects":     dataSourceCiscoASANetworkObjects(),
+			"ciscoasa_network_service":     dataSourceCiscoASANetworkService(),
+			"ciscoasa_network_services":    dataSourceCiscoASANetworkServices(),
 		},
 
 		ConfigureFunc: providerConfigure,
@@ -354,4 +379,16 @@ func flattenIPv6Info(in *ciscoasa.IPv6Info) []map[string]interface{} {
 	out = append(out, m)
 
 	return out
+}
+
+func isInterfaceHwId(iface string) bool {
+	return strings.Contains(iface, "/")
+}
+
+func objectIdFromHwId(iface string) string {
+	return strings.Replace(iface, "/", "_API_SLASH_", 1)
+}
+
+func hwIdFromObjId(id string) string {
+	return strings.Replace(id, "_API_SLASH_", "/", 1)
 }
