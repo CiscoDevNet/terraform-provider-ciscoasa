@@ -1,2 +1,5 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text=false
+
+# disabling diff for vendor folder in pull requests diff view (documentation: https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github)
+vendor/* linguist-generated=true
