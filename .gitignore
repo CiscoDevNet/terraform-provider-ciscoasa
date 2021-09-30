@@ -27,5 +27,9 @@ _testmain.go
 *.pem
 *.pub
 terraform.tfstate
+.terraform.lock.hcl
 .terraform
 terraform.tfstate.*
+
+# Config files for local development environment
+*.env

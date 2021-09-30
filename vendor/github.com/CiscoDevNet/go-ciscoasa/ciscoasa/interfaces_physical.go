@@ -1,8 +1,6 @@
 package ciscoasa
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // PhysicalInterfaceCollection represents a collection of physical interfaces.
 type PhysicalInterfaceCollection struct {

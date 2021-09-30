@@ -1044,7 +1044,7 @@ func checkIfIndexesIntoTypeSet(key string, f TestCheckFunc) TestCheckFunc {
 	return func(s *terraform.State) error {
 		err := f(s)
 		if err != nil && s.IsBinaryDrivenTest && indexesIntoTypeSet(key) {
-			return fmt.Errorf("Error in test check: %s\nTest check address %q likely indexes into TypeSet\nThis is currently not possible in the SDK: %s", err, key, s)
+			return fmt.Errorf("Error in test check: %s\nTest check address %q likely indexes into TypeSet\nThis is currently not possible in the SDK", err, key)
 		}
 		return err
 	}

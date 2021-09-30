@@ -54,6 +54,7 @@ type Client struct {
 	Nat         *natService
 	Failover    *failoverService
 	Licensing   *licenseService
+	Save        *saveService
 }
 
 // ErrorResponse represents an error response
@@ -120,6 +121,7 @@ func NewClient(apiURL, username, password string, sslNoVerify bool) (*Client, er
 	c.Interfaces = &interfaceService{c}
 	c.Objects = &objectsService{c}
 	c.Routing = &routingService{c}
+	c.Save = &saveService{c}
 	c.DeviceSetup = &devicesetupService{c}
 	c.Dhcp = &dhcpService{c}
 	c.Nat = &natService{c}

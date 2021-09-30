@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
 func resourceCiscoASALicenseRenewId() *schema.Resource {

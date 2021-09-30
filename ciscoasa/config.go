@@ -1,6 +1,6 @@
 package ciscoasa
 
-import "github.com/xanzy/go-ciscoasa/ciscoasa"
+import "github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 
 // Config is the configuration structure used to instantiate a
 // new CiscoAsa client.

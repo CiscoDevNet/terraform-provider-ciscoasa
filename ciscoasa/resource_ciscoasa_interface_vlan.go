@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/CiscoDevNet/go-ciscoasa/ciscoasa"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/xanzy/go-ciscoasa/ciscoasa"
 )
 
 func resourceCiscoASAVlanInterface() *schema.Resource {
