@@ -67,6 +67,20 @@ func (c *licenseService) RegisterLicense(token string, force bool) error {
 	return err
 }
 
+// DeregisterLicense removes the Smart License.
+func (c *licenseService) DeregisterLicense() error {
+	u := "/api/licensing/smart/asav/deregister"
+
+	req, err := c.newRequest("POST", u, nil)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req, nil)
+
+	return err
+}
+
 // RenewIdLicense renews the Smart License entitlement.
 func (c *licenseService) RenewAuthLicense() error {
 	u := "/api/licensing/smart/asav/renewauth"
