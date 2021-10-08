@@ -3,12 +3,12 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_interfaces_physical"
 sidebar_current: "docs-ciscoasa-datasource-interfaces-physical"
 description: |-
-  Provides a Cisco ASA Interfaces Physical Data Source.
+  Provides a Cisco ASA Physical Interfaces Data Source.
 ---
 
 # ciscoasa_interfaces_physical
 
-Provides a Cisco ASA Interface Physical Data Source.
+Provides a Cisco ASA Physical Interfaces Data Source.
 
 ## Example Usage
 
