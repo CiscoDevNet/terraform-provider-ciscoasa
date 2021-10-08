@@ -1,6 +1,6 @@
 ---
 layout: "ciscoasa"
-page_title: "Cisco ASA: ciscoasa_dhcp_relay_local"
+page_title: "Cisco ASA: ciscoasa_dhcp_relay"
 sidebar_current: "docs-ciscoasa-resource-dhcp-relay-local"
 description: |-
   Provides a Cisco ASA DHCP Relay Interface Server resource.
