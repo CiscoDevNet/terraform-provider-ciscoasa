@@ -3,7 +3,7 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_access_timerange"
 sidebar_current: "docs-ciscoasa-resource-timerange"
 description: |-
-  Provides Cisco ASA Time Range.
+  Provides Cisco ASA Time Range Resource.
 ---
 
 # ciscoasa_timerange
