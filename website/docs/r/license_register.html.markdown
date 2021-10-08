@@ -3,18 +3,19 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_license_register"
 sidebar_current: "docs-ciscoasa-resource-license-register"
 description: |-
-  Provides a Cisco ASA Register the Smart License resource.
+  Provides a Cisco ASA Smart License Registration resource.
 ---
 
 # ciscoasa_license_register
 
-Provides a Cisco ASA Register the Smart License resource.
+Provides a Cisco ASA Smart License Registration resource.
+terraform destroy command will deregister the Cisco ASA's smart license
 
 ## Example Usage
 
 ```hcl
 resource "ciscoasa_license_register" "test" {
-  id_token = "ZDBmOTJjOWItMTk5NS00ODNhLThmZWUtMDQ0NjNkMjM4YzlmLTE0NDUwOTQw%0AMzUyNzN8T1ArdTVHaHpWeWcwaHRwMzhMaWRtaW9FTWxoNHRXc3RTOGt3Tk1V%0AZ0JLMD0%3D%0A"
+  id_token = "<registration token>"
 }
 ```
 
