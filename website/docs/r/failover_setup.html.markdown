@@ -51,12 +51,12 @@ The following arguments are supported:
 * `monitored_poll_time` - (Optional) Monitored Interfaces for Failover Poll Times.
 * `monitored_poll_time_unit` - (Optional) Unit of Monitored Interfaces for Failover Poll Times: seconds or milliseconds.
 * `interface_hold_time` - (Optional) Interface hold time in seconds. Range 5-75 and at least 5 times interface poll time.
-* `lan_interface_hw_id` - (Optional) Interface for LAN failover.
-* `lan_failover_name` - (Optional) Logical name for LAN failover interface.
-* `lan_primary_ip` - (Optional) Active IP for LAN failover.
-* `lan_secondary_ip` - (Optional) Standby IP for LAN failover.
-* `lan_net_mask` - (Optional) Subnet Mask for LAN failover.
-* `lan_preferred_role` - (Optional) Lan failover interface preferred role.
+* `lan_interface_hw_id` - (Required) Interface for LAN failover.
+* `lan_failover_name` - (Required) Logical name for LAN failover interface.
+* `lan_primary_ip` - (Required) Active IP for LAN failover.
+* `lan_secondary_ip` - (Required) Standby IP for LAN failover.
+* `lan_net_mask` - (Required) Subnet Mask for LAN failover.
+* `lan_preferred_role` - (Required) Lan failover interface preferred role.
 * `state_interface_hw_id` - (Optional) Interface for State Failover.
 * `state_failover_name` - (Optional) Logical name for State Failover.
 * `state_primary_ip` - (Optional) Active IP for State Failover.
