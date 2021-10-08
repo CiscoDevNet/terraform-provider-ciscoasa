@@ -8,7 +8,7 @@ description: |-
 
 # ciscoasa_nat
 
-Provides a Cisco ASA Failover Setup resource.
+Provides a Cisco ASA NAT resource.
 
 ## Example Usage
 
@@ -72,9 +72,9 @@ The following arguments are supported:
 * `original_destination` - (Optional) Original destination network object reference
 * `original_interface_name` - (Optional) Real interface object reference
 * `original_service` - (Optional) Original service object reference
-* `original_source` - (Optional) Original source network object reference
+* `original_source` - (Required) Original source network object reference
 * `translate_destination` - (Optional) Mapped/translated destination network object reference
 * `translated_interface_name` - (Optional) Mapped/translated interface object reference
 * `translated_service` - (Optional) Mapped/translated service object reference
-* `translated_source` - (Optional) Mapped/translated source network object reference
+* `translated_source` - (Required) Mapped/translated source network object reference
 * `translated_source_pat_pool` - (Optional) PAT Pool network address for mapped source
