@@ -1,4 +1,29 @@
-## 1.3.0 (Unreleased)
+## 1.3.0 (October 8th, 2021)
+
+* Added support for new features on ASA
+  * Network Object
+  * Network Object Group
+  * Service Object
+  * Service Object Group
+  * Access Rule In
+  * Acces Rule Out
+  * Backup
+  * DHCP Relay
+  * DHCP Server
+  * Failover
+  * Licensing
+  * NAT
+  * NTP
+  * Static Route
+  * Time Range Objects
+
+## 1.2.3 (July 28th, 2021)
+
+FEATURES
+
+* Added support for Physical and VLAN Interfaces
+* Upgraded to TF Plugin SDK v2
+
 ## 1.2.0 (June 11, 2019)
 
 FEATURES
