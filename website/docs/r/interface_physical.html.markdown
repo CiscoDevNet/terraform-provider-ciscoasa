@@ -3,12 +3,12 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_interface_physical"
 sidebar_current: "docs-ciscoasa-resource-interface-physical"
 description: |-
-  Provides a Cisco ASA Interface Physical resource.
+  Provides a Cisco ASA Physical Interface resource.
 ---
 
 # ciscoasa_interface_physical
 
-Provides a Cisco ASA interface physical resource.
+Provides a Cisco ASA Physical Interface resource.
 
 ## Example Usage
 
@@ -26,10 +26,10 @@ resource "ciscoasa_interface_physical" "tengig_ipv4_static" {
   security_level = 0
 }
 
-resource "ciscoasa_interface_physical" "tengig_ipv4_dhcp_sla" {
+resource "ciscoasa_interface_physical" "tengig_ipv4_dhcp" {
   name           = "tengig1"
   hardware_id    = "TenGigabitEthernet0/1"
-  interface_desc = "TenGig DHCP Sla tracking"
+  interface_desc = "TenGig DHCP"
 
   ip_address {
     dhcp {
@@ -39,17 +39,7 @@ resource "ciscoasa_interface_physical" "tengig_ipv4_dhcp_sla" {
         set_default_route = false
         metric            = 1
         primary_track_id  = 6
-        tracking_enabled  = true
-        sla_tracking_settings {
-          sla_id                    = 8
-          tracked_ip                = "10.0.1.5"
-          frequency_in_seconds      = 61
-          data_size_in_bytes        = 30
-          threshold_in_milliseconds = 5001
-          tos                       = 2
-          timeout_in_milliseconds   = 5002
-          num_packets               = 2
-        }
+        tracking_enabled  = false
       }
     }
   }
@@ -127,7 +117,7 @@ The following arguments are supported:
 
 * `dhcp_option_using_mac` - (Required)
 * `dhcp_broadcast` - (Required)
-* `dhcp_client` - (Optional) One `dhcp_client` element as defined below
+* `dhcp_client` - (Required) One `dhcp_client` element as defined below
 
 ### `dhcp_client` supports the following:
 
@@ -184,3 +174,5 @@ The following arguments are supported:
 * `valid_lifetime` - (Required)
 * `has_duration` - (Required)
 * `default_prefix` - (Required)
+
+Note: DHCP is supported but while performing terraform destroy, the Physical interface resource may not get deleted from the terraform state file and terraform destroy command will need to be executed again.
