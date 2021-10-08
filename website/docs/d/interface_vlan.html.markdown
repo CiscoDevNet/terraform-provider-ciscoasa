@@ -3,12 +3,12 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_interface_vlan"
 sidebar_current: "docs-ciscoasa-datasource-interface-vlan"
 description: |-
-  Provides a Cisco ASA Interface Vlan Data Source.
+  Provides a Cisco ASA VLAN Interface Data Source.
 ---
 
 # ciscoasa_interface_vlan
 
-Provides a Cisco ASA Interface Vlan Data Source.
+Provides a Cisco ASA VLAN Interface Data Source.
 
 ## Example Usage
 
