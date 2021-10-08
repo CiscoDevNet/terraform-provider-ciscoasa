@@ -3,12 +3,12 @@ layout: "ciscoasa"
 page_title: "Cisco ASA: ciscoasa_interface_vlan"
 sidebar_current: "docs-ciscoasa-resource-interface-vlan"
 description: |-
-  Provides a Cisco ASA Interface Vlan resource.
+  Provides a Cisco ASA VLAN Interface resource.
 ---
 
 # ciscoasa_interface_vlan
 
-Provides a Cisco ASA interface vlan resource.
+Provides a Cisco ASA VLAN Interface resource.
 
 ## Example Usage
 
@@ -34,10 +34,10 @@ resource "ciscoasa_interface_vlan" "tengig_ipv4_static" {
   security_level = 0
 }
 
-resource "ciscoasa_interface_vlan" "tengig_ipv4_dhcp_sla" {
+resource "ciscoasa_interface_vlan" "tengig_ipv4_dhcp" {
   name           = "vlantengig160"
   hardware_id    = "TenGigabitEthernet0/1.160"
-  interface_desc = "VlanTenGig DHCP Sla tracking"
+  interface_desc = "VlanTenGig DHCP"
 
   ip_address {
     dhcp {
@@ -47,17 +47,7 @@ resource "ciscoasa_interface_vlan" "tengig_ipv4_dhcp_sla" {
         set_default_route = false
         metric            = 1
         primary_track_id  = 6
-        tracking_enabled  = true
-        sla_tracking_settings {
-          sla_id                    = 8
-          tracked_ip                = "10.0.2.6"
-          frequency_in_seconds      = 61
-          data_size_in_bytes        = 30
-          threshold_in_milliseconds = 5001
-          tos                       = 2
-          timeout_in_milliseconds   = 5002
-          num_packets               = 2
-        }
+        tracking_enabled  = false
       }
     }
   }
@@ -136,7 +126,7 @@ The following arguments are supported:
 
 * `dhcp_option_using_mac` - (Required)
 * `dhcp_broadcast` - (Required)
-* `dhcp_client` - (Optional) One `dhcp_client` element as defined below
+* `dhcp_client` - (Required) One `dhcp_client` element as defined below
 
 ### `dhcp_client` supports the following:
 
@@ -194,3 +184,5 @@ The following arguments are supported:
 * `valid_lifetime` - (Required)
 * `has_duration` - (Required)
 * `default_prefix` - (Required)
+
+Note: DHCP is supported but while performing terraform destroy, the Vlan interface resource may not get deleted from the terraform state file and terraform destroy command will need to be executed again.
