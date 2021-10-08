@@ -26,26 +26,6 @@ resource "ciscoasa_interface_physical" "ipv4_interface" {
   security_level = 0
 }
 
-resource "ciscoasa_interface_physical" "tengig_ipv4_dhcp" {
-  name           = "tengig"
-  hardware_id    = "TenGigabitEthernet0/2"
-  interface_desc = "Interface DHCP"
-  ip_address {
-    dhcp {
-      dhcp_option_using_mac = false
-      dhcp_broadcast        = true
-      dhcp_client {
-        set_default_route = true
-        metric            = 1
-        primary_track_id  = -1
-        tracking_enabled  = false
-      }
-    }
-  }
-  security_level = 0
-}
-
-
 resource "ciscoasa_dhcp_server" "dhcp_test" {
   interface             = ciscoasa_interface_physical.ipv4_interface.name
   enabled               = true
@@ -59,8 +39,8 @@ resource "ciscoasa_dhcp_server" "dhcp_test" {
   ping_timeout          = "40"
   domain_name           = "testing1"
   auto_config_enabled   = true
-  auto_config_interface = ciscoasa_interface_physical.tengig_ipv4_dhcp.name
-  vpn_override          = true
+  auto_config_interface = false
+  vpn_override          = false
   options {
     type   = "hex"
     code   = 2
@@ -88,9 +68,9 @@ resource "ciscoasa_dhcp_server" "dhcp_test" {
 The following arguments are supported:
 
 * `interface` - (Required) Name of the interface for DHCP server.
-* `enabled` - (Optional) Enable the DHCP server.
-* `pool_start_ip` - (Optional) DHCP address pool start IP addresses.
-* `pool_end_ip` - (Optional) DHCP address pool end IP addresses.
+* `enabled` - (Required) Enable the DHCP server.
+* `pool_start_ip` - (Required) DHCP address pool start IP addresses.
+* `pool_end_ip` - (Required) DHCP address pool end IP addresses.
 * `dns_ip_primary` - (Optional) IP addresses of the primary DNS server.
 * `dns_ip_secondary` - (Optional) IP addresses of the secondary DNS server.
 * `wins_ip_primary` - (Optional) IP addresses of the primary WINS server.
