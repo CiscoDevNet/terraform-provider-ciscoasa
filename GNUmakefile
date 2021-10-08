@@ -1,11 +1,20 @@
 TEST?=./...
 PKG_NAME=ciscoasa
 WEBSITE_REPO=github.com/hashicorp/terraform-website
+HOSTNAME=registry.terraform.io
+NAMESPACE=CiscoDevNet
+BINARY=terraform-provider-${PKG_NAME}
+VERSION=0.2
+OS_ARCH=$(shell go env GOOS)_$(shell go env GOARCH)
 
 default: build
 
 build:
-	go install
+	go build -o ${BINARY}_${VERSION}_${OS_ARCH}
+
+install: build
+	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${PKG_NAME}/${VERSION}/${OS_ARCH}
+	mv ${BINARY}_${VERSION}_${OS_ARCH} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${PKG_NAME}/${VERSION}/${OS_ARCH}
 
 fmtcheck:
 	@sh -c "'$(CURDIR)/scripts/gofmtcheck.sh'"

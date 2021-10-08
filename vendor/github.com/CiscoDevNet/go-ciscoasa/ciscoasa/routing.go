@@ -168,7 +168,7 @@ func (s *routingService) UpdateStaticRoute(routeID, iface, network, gateway stri
 	r.Interface.Name = iface
 	r.Interface.Kind = "objectRef#Interface"
 
-	req, err := s.newRequest("POST", u, r)
+	req, err := s.newRequest("PUT", u, r)
 	if err != nil {
 		return "", err
 	}

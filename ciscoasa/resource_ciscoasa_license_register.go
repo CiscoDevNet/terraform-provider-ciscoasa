@@ -13,7 +13,7 @@ func resourceCiscoASALicenseRegister() *schema.Resource {
 	return &schema.Resource{
 		Create:        resourceCiscoASALicenseRegisterCreate,
 		ReadContext:   schema.NoopContext,
-		DeleteContext: schema.NoopContext,
+		Delete: resourceCiscoASALicenseRegisterDelete,
 
 		Schema: map[string]*schema.Schema{
 			"id_token": {
@@ -44,6 +44,20 @@ func resourceCiscoASALicenseRegisterCreate(d *schema.ResourceData, meta interfac
 	}
 
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+
+	return nil
+}
+
+func resourceCiscoASALicenseRegisterDelete(d *schema.ResourceData, meta interface{}) error {
+	ca := meta.(*ciscoasa.Client)
+
+	err := ca.Licensing.DeregisterLicense()
+	if err != nil {
+		return fmt.Errorf(
+			"Error deleting LicenseRegister: %v", err)
+	}
+
+	d.SetId("")
 
 	return nil
 }
