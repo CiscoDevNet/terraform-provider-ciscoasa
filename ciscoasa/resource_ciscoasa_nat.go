@@ -320,7 +320,7 @@ func resourceCiscoASANatCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 	Nat.OriginalService = objFromKindValue(d, "original_service")
 	Nat.OriginalSource = objFromKindValue(d, "original_source")
-	Nat.TranslatedDestination = objFromKindValue(d, "translate_destination")
+	Nat.TranslatedDestination = objFromKindValue(d, "translated_destination")
 	if translatedInterfaceName, ok := d.GetOk("translated_interface_name"); ok {
 		Nat.TranslatedInterface = objFromInterfaceName(translatedInterfaceName)
 	}
@@ -444,7 +444,7 @@ func resourceCiscoASANatUpdate(d *schema.ResourceData, meta interface{}) error {
 		"original_interface_name",
 		"original_service",
 		"original_source",
-		"translate_destination",
+		"translated_destination",
 		"translated_interface_name",
 		"translated_service",
 		"translated_source",
@@ -477,7 +477,7 @@ func resourceCiscoASANatUpdate(d *schema.ResourceData, meta interface{}) error {
 		}
 		Nat.OriginalService = objFromKindValue(d, "original_service")
 		Nat.OriginalSource = objFromKindValue(d, "original_source")
-		Nat.TranslatedDestination = objFromKindValue(d, "translate_destination")
+		Nat.TranslatedDestination = objFromKindValue(d, "translated_destination")
 		if translatedInterfaceName, ok := d.GetOk("translated_interface_name"); ok {
 			Nat.TranslatedInterface = objFromInterfaceName(translatedInterfaceName)
 		}
