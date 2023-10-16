@@ -33,3 +33,5 @@ terraform.tfstate.*
 
 # Config files for local development environment
 *.env
+
+dist/

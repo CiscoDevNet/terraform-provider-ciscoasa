@@ -122,11 +122,13 @@ func resourceCiscoASANat() *schema.Resource {
 					"objectRef#NetworkObj",
 					"objectRef#NetworkObjGroup",
 				}, false),
+				ForceNew: true,
 			},
 
 			"translated_source_value": {
 				Type:     schema.TypeString,
 				Optional: true,
+				ForceNew: true,
 			},
 
 			"translated_destination_kind": {
@@ -142,11 +144,13 @@ func resourceCiscoASANat() *schema.Resource {
 					"objectRef#NetworkObj",
 					"objectRef#NetworkObjGroup",
 				}, false),
+				ForceNew: true,
 			},
 
 			"translated_destination_value": {
 				Type:     schema.TypeString,
 				Optional: true,
+				ForceNew: true,
 			},
 
 			"translated_service_kind": {
